@@ -1,22 +1,21 @@
 """Integration test for the translation pipeline with mocked LLM APIs."""
 
 import json
-import tempfile
 from pathlib import Path
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch
 
 import pandas as pd
+import yaml
 
 from src.translation.translate import run_translation
 
 
 def _create_test_fixtures(tmp_dir: Path) -> dict:
     """Create minimal test data and configs for integration test."""
-    # Minimal CSV with 2 reports
     reports = pd.DataFrame({
         "report_id": ["RPT_001", "RPT_002"],
         "report_text_raw": [
-            "Se observa un nódulo en mama derecha.",
+            "Se observa un nodulo en mama derecha.",
             "No se observan calcificaciones sospechosas.",
         ],
         "birads_label": [2, 1],
@@ -24,27 +23,25 @@ def _create_test_fixtures(tmp_dir: Path) -> dict:
     source_path = tmp_dir / "test_reports.csv"
     reports.to_csv(source_path, index=False, encoding="utf-8")
 
-    # Minimal glossary
     glossary = {
         "metadata": {"source": "test"},
         "terms": {
             "anatomy": [{"es": "mama derecha", "pt": "mama direita"}],
-            "findings": [{"es": "nódulo", "pt": "nódulo"}],
+            "findings": [{"es": "nodulo", "pt": "nodulo"}],
         },
     }
     glossary_path = tmp_dir / "glossary.json"
     with open(glossary_path, "w", encoding="utf-8") as f:
         json.dump(glossary, f, ensure_ascii=False)
 
-    # Minimal models.yaml
     models_yaml = {
         "models": {
-            "gemini-2.0-flash": {
+            "gemini-2.5-flash": {
                 "provider": "google",
-                "model_id": "gemini-2.0-flash",
+                "model_id": "gemini-2.5-flash",
                 "env_key": "GOOGLE_API_KEY",
-                "cost_per_1m_input": 0.0,
-                "cost_per_1m_output": 0.0,
+                "cost_per_1m_input": 0.15,
+                "cost_per_1m_output": 0.60,
                 "cost_limit_usd": 50.0,
             },
             "deepseek-v3": {
@@ -58,7 +55,6 @@ def _create_test_fixtures(tmp_dir: Path) -> dict:
             },
         },
     }
-    import yaml
     models_path = tmp_dir / "models.yaml"
     with open(models_path, "w", encoding="utf-8") as f:
         yaml.dump(models_yaml, f)
@@ -66,13 +62,11 @@ def _create_test_fixtures(tmp_dir: Path) -> dict:
     config = {
         "source_path": str(source_path),
         "output_path": str(tmp_dir / "translated.csv"),
-        "output_primary_path": str(tmp_dir / "primary.csv"),
-        "output_secondary_path": str(tmp_dir / "secondary.csv"),
-        "divergences_path": str(tmp_dir / "results" / "divergences.json"),
+        "translations_path": str(tmp_dir / "translations.csv"),
+        "audit_path": str(tmp_dir / "results" / "audit_results.json"),
         "stats_path": str(tmp_dir / "results" / "stats.json"),
-        "llm_primary": "gemini-2.0-flash",
-        "llm_secondary": "deepseek-v3",
-        "similarity_threshold": 0.95,
+        "llm_translator": "gemini-2.5-flash",
+        "llm_auditor": "deepseek-v3",
         "temperature": 0,
         "birads_glossary_path": str(glossary_path),
         "models_config_path": str(models_path),
@@ -83,15 +77,19 @@ def _create_test_fixtures(tmp_dir: Path) -> dict:
     return config
 
 
-@patch("src.translation.client.LLMClient.generate")
-@patch("src.translation.validate.compute_similarity")
+# Mock the translator to return Portuguese text, and the auditor to return approval JSON
+def _mock_generate(prompt, temperature=0):
+    """Mock generate that returns translation or audit depending on prompt content."""
+    if "RESULTADO DA AUDITORIA" in prompt:
+        return '{"aprovado": true, "score": 9, "inconsistencias": []}'
+    return "Observa-se um nodulo na mama direita."
+
+
+@patch("src.translation.client.LLMClient.generate", side_effect=_mock_generate)
+@patch("src.translation.validate.compute_similarity", return_value=0.95)
 def test_pipeline_produces_output_files(mock_similarity, mock_generate, tmp_path):
     """Full pipeline with mocked APIs produces expected output files."""
     config = _create_test_fixtures(tmp_path)
-
-    # Mock LLM responses
-    mock_generate.return_value = "Observa-se um nódulo na mama direita."
-    mock_similarity.return_value = 0.98
 
     with patch.dict("os.environ", {
         "GOOGLE_API_KEY": "fake",
@@ -101,7 +99,7 @@ def test_pipeline_produces_output_files(mock_similarity, mock_generate, tmp_path
 
     # Check output files exist
     assert Path(config["output_path"]).exists()
-    assert Path(config["divergences_path"]).exists()
+    assert Path(config["audit_path"]).exists()
     assert Path(config["stats_path"]).exists()
 
     # Check translated CSV has correct structure
@@ -115,4 +113,11 @@ def test_pipeline_produces_output_files(mock_similarity, mock_generate, tmp_path
     with open(config["stats_path"], encoding="utf-8") as f:
         stats = json.load(f)
     assert stats["total_reports"] == 2
-    assert stats["translated_reports"] == 2
+    assert stats["translated_successfully"] == 2
+    assert stats["audit_approved"] == 2
+
+    # Check audit results
+    with open(config["audit_path"], encoding="utf-8") as f:
+        audits = json.load(f)
+    assert len(audits) == 2
+    assert all(a["audit"]["aprovado"] for a in audits)

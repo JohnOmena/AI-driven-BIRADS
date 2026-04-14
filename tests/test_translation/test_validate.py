@@ -1,43 +1,99 @@
-"""Tests for translation validation (similarity + BI-RADS lexicon check)."""
+"""Tests for translation validation (audit parsing + BI-RADS lexicon check)."""
 
 from src.translation.validate import (
-    check_birads_terms_match,
-    classify_divergence,
+    check_birads_terms_preserved,
+    parse_audit_response,
+    classify_translation,
 )
 
 
-def test_birads_terms_match_identical():
-    """Identical translations should have all terms matching."""
-    glossary_pt = ["mama direita", "calcificação", "nódulo"]
-    text_a = "Observa-se um nódulo na mama direita com calcificação."
-    text_b = "Observa-se um nódulo na mama direita com calcificação."
-    result = check_birads_terms_match(text_a, text_b, glossary_pt)
+# --- BI-RADS term preservation tests ---
+
+def test_birads_terms_preserved_all_found():
+    """All expected PT terms present in translation."""
+    pairs = [("mama derecha", "mama direita"), ("nodulo", "nodulo"), ("calcificacion", "calcificacao")]
+    original = "Se observa un nodulo en mama derecha con calcificacion."
+    translated = "Observa-se um nodulo na mama direita com calcificacao."
+    result = check_birads_terms_preserved(original, translated, pairs)
     assert result["match_ratio"] == 1.0
+    assert len(result["missing_terms"]) == 0
 
 
-def test_birads_terms_match_divergent():
-    """Different BI-RADS terms should be flagged."""
-    glossary_pt = ["mama direita", "mama esquerda", "nódulo"]
-    text_a = "Observa-se um nódulo na mama direita."
-    text_b = "Observa-se um nódulo na mama esquerda."
-    result = check_birads_terms_match(text_a, text_b, glossary_pt)
+def test_birads_terms_preserved_missing():
+    """Missing PT term should be flagged."""
+    pairs = [("mama derecha", "mama direita"), ("espiculado", "espiculado")]
+    original = "Nodulo espiculado en mama derecha."
+    translated = "Nodulo na mama direita."  # missing espiculado
+    result = check_birads_terms_preserved(original, translated, pairs)
     assert result["match_ratio"] < 1.0
-    assert len(result["mismatched_terms"]) > 0
+    assert len(result["missing_terms"]) > 0
+    assert any(t["es"] == "espiculado" for t in result["missing_terms"])
 
 
-def test_classify_divergence_ok():
-    """High similarity + high term match = OK."""
-    result = classify_divergence(similarity=0.98, term_match_ratio=1.0, threshold=0.95)
-    assert result == "ok"
+def test_birads_terms_no_terms_in_original():
+    """No glossary terms in original = 1.0 match ratio."""
+    pairs = [("mama derecha", "mama direita")]
+    original = "Examen normal."
+    translated = "Exame normal."
+    result = check_birads_terms_preserved(original, translated, pairs)
+    assert result["match_ratio"] == 1.0
+    assert result["total_expected"] == 0
 
 
-def test_classify_divergence_review():
-    """Low similarity = needs review."""
-    result = classify_divergence(similarity=0.90, term_match_ratio=1.0, threshold=0.95)
+# --- Audit response parsing tests ---
+
+def test_parse_audit_response_valid_json():
+    """Parse valid JSON audit response."""
+    response = '{"aprovado": true, "score": 9, "inconsistencias": []}'
+    result = parse_audit_response(response)
+    assert result["aprovado"] is True
+    assert result["score"] == 9
+    assert result["inconsistencias"] == []
+
+
+def test_parse_audit_response_markdown_block():
+    """Parse JSON wrapped in markdown code block."""
+    response = '```json\n{"aprovado": false, "score": 6, "inconsistencias": [{"criterio": "lexico", "problema": "termo incorreto"}]}\n```'
+    result = parse_audit_response(response)
+    assert result["aprovado"] is False
+    assert result["score"] == 6
+    assert len(result["inconsistencias"]) == 1
+
+
+def test_parse_audit_response_with_extra_text():
+    """Parse JSON when LLM adds extra text before/after."""
+    response = 'Aqui esta a avaliacao:\n{"aprovado": true, "score": 10, "inconsistencias": []}\nFim.'
+    result = parse_audit_response(response)
+    assert result["aprovado"] is True
+    assert result["score"] == 10
+
+
+def test_parse_audit_response_invalid():
+    """Invalid response returns failed audit."""
+    response = "Nao consigo avaliar este texto."
+    result = parse_audit_response(response)
+    assert result["aprovado"] is False
+    assert result["score"] == 0
+
+
+# --- Classification tests ---
+
+def test_classify_approved():
+    """High audit + high similarity + good terms = approved."""
+    audit = {"aprovado": True, "score": 9}
+    result = classify_translation(audit, similarity=0.95, term_match_ratio=1.0)
+    assert result == "approved"
+
+
+def test_classify_review():
+    """Medium audit score but decent similarity = review."""
+    audit = {"aprovado": False, "score": 7}
+    result = classify_translation(audit, similarity=0.90, term_match_ratio=0.9)
     assert result == "review"
 
 
-def test_classify_divergence_term_mismatch():
-    """High similarity but low term match = needs review."""
-    result = classify_divergence(similarity=0.98, term_match_ratio=0.5, threshold=0.95)
-    assert result == "review"
+def test_classify_rejected():
+    """Low audit + low similarity = rejected."""
+    audit = {"aprovado": False, "score": 3}
+    result = classify_translation(audit, similarity=0.70, term_match_ratio=0.5)
+    assert result == "rejected"

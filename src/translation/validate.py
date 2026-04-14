@@ -1,4 +1,7 @@
-"""Validate translation fidelity: semantic similarity + BI-RADS lexicon check."""
+"""Validate translation fidelity: LLM audit + semantic similarity + BI-RADS lexicon check."""
+
+import json
+import re
 
 from sentence_transformers import SentenceTransformer
 import numpy as np
@@ -25,47 +28,92 @@ def compute_similarity(text_a: str, text_b: str) -> float:
     return float(cos_sim)
 
 
-def check_birads_terms_match(
-    text_a: str, text_b: str, glossary_pt_terms: list[str]
+def check_birads_terms_preserved(
+    original_es: str, translated_pt: str,
+    glossary_pairs: list[tuple[str, str]],
 ) -> dict:
-    """Check if both translations contain the same BI-RADS terms.
+    """Check if BI-RADS terms from the original were correctly translated.
 
-    Returns dict with match_ratio and list of mismatched terms.
+    For each ES term found in the original, checks if the corresponding PT term
+    appears in the translation.
+
+    Returns dict with match_ratio, matched_terms, and missing_terms.
     """
-    text_a_lower = text_a.lower()
-    text_b_lower = text_b.lower()
+    original_lower = original_es.lower()
+    translated_lower = translated_pt.lower()
 
-    terms_in_a = set()
-    terms_in_b = set()
-    for term in glossary_pt_terms:
-        term_lower = term.lower()
-        if term_lower in text_a_lower:
-            terms_in_a.add(term)
-        if term_lower in text_b_lower:
-            terms_in_b.add(term)
+    expected_translations = []
+    for es_term, pt_term in glossary_pairs:
+        if es_term.lower() in original_lower:
+            expected_translations.append((es_term, pt_term))
 
-    all_terms = terms_in_a | terms_in_b
-    if not all_terms:
-        return {"match_ratio": 1.0, "mismatched_terms": [], "terms_found": 0}
+    if not expected_translations:
+        return {"match_ratio": 1.0, "matched_terms": [], "missing_terms": [], "total_expected": 0}
 
-    matching = terms_in_a & terms_in_b
-    mismatched = list(all_terms - matching)
-    match_ratio = len(matching) / len(all_terms)
+    matched = []
+    missing = []
+    for es_term, pt_term in expected_translations:
+        if pt_term.lower() in translated_lower:
+            matched.append({"es": es_term, "pt": pt_term})
+        else:
+            missing.append({"es": es_term, "pt_expected": pt_term})
 
+    match_ratio = len(matched) / len(expected_translations)
     return {
         "match_ratio": match_ratio,
-        "mismatched_terms": mismatched,
-        "terms_found": len(all_terms),
+        "matched_terms": matched,
+        "missing_terms": missing,
+        "total_expected": len(expected_translations),
     }
 
 
-def classify_divergence(
-    similarity: float, term_match_ratio: float, threshold: float = 0.95
-) -> str:
-    """Classify whether a translation pair needs review.
+def parse_audit_response(response_text: str) -> dict:
+    """Parse the JSON audit response from the auditor LLM.
 
-    Returns 'ok' or 'review'.
+    Handles cases where the LLM wraps the JSON in markdown code blocks
+    or adds extra text.
+
+    Returns dict with keys: aprovado, score, inconsistencias.
+    Falls back to a failed audit if parsing fails.
     """
-    if similarity >= threshold and term_match_ratio >= 0.8:
-        return "ok"
-    return "review"
+    text = response_text.strip()
+
+    # Try to extract JSON from markdown code block
+    json_match = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.DOTALL)
+    if json_match:
+        text = json_match.group(1)
+    else:
+        # Try to find raw JSON object
+        json_match = re.search(r"\{.*\}", text, re.DOTALL)
+        if json_match:
+            text = json_match.group(0)
+
+    try:
+        result = json.loads(text)
+        # Validate expected keys
+        if "aprovado" not in result:
+            result["aprovado"] = False
+        if "score" not in result:
+            result["score"] = 0
+        if "inconsistencias" not in result:
+            result["inconsistencias"] = []
+        return result
+    except (json.JSONDecodeError, ValueError):
+        return {
+            "aprovado": False,
+            "score": 0,
+            "inconsistencias": [{"criterio": "parse_error", "problema": f"Failed to parse audit response: {text[:200]}"}],
+            "raw_response": text[:500],
+        }
+
+
+def classify_translation(audit_result: dict, similarity: float, term_match_ratio: float) -> str:
+    """Classify overall translation quality combining audit + metrics.
+
+    Returns 'approved', 'review', or 'rejected'.
+    """
+    if audit_result.get("aprovado") and similarity >= 0.90 and term_match_ratio >= 0.8:
+        return "approved"
+    if audit_result.get("score", 0) >= 7 and similarity >= 0.85:
+        return "review"
+    return "rejected"
