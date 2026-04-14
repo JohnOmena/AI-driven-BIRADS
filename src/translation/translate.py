@@ -11,6 +11,7 @@ from pathlib import Path
 
 import pandas as pd
 import yaml
+from dotenv import load_dotenv
 from tqdm import tqdm
 
 from src.translation.config import CONFIG, parse_args
@@ -83,7 +84,7 @@ def save_translations(translations: list[dict], output_path: str, append: bool =
 def run_translation(config: dict) -> None:
     """Run the full translation pipeline."""
     print("=" * 60)
-    print("Translation Pipeline ES → PT")
+    print("Translation Pipeline ES -> PT")
     print("=" * 60)
 
     # Load data
@@ -238,5 +239,6 @@ def run_translation(config: dict) -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv()
     config = parse_args()
     run_translation(config)

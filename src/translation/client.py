@@ -21,8 +21,10 @@ class LLMClient:
     total_output_tokens: int = 0
     total_cost_usd: float = 0.0
 
+    _last_cost_alert_usd: float = 0.0
+
     def _update_usage(self, input_tokens: int, output_tokens: int) -> None:
-        """Track token usage and cost."""
+        """Track token usage and cost. Alerts every $10 spent."""
         self.total_input_tokens += input_tokens
         self.total_output_tokens += output_tokens
         cost = (
@@ -30,6 +32,12 @@ class LLMClient:
             + output_tokens * self.cost_per_1m_output / 1_000_000
         )
         self.total_cost_usd += cost
+
+        # Alert every $10 milestone
+        current_milestone = int(self.total_cost_usd / 10) * 10
+        if current_milestone > 0 and current_milestone > self._last_cost_alert_usd:
+            self._last_cost_alert_usd = current_milestone
+            print(f"\n⚠ ALERTA DE CUSTO [{self.name}]: ${self.total_cost_usd:.2f} atingidos (limite: ${self.cost_limit_usd:.2f})")
 
     def check_cost_limit(self) -> bool:
         """Return True if cost is within limit."""
