@@ -1,0 +1,95 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "field": "single_nodule",
+      "question_pt": "Temos apenas um nódulo sendo descrito no exame atual?",
+      "question_es": "¿Se describe solo un nódulo en el examen actual?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 2,
+      "field": "has_calcifications",
+      "question_pt": "Há calcificações descritas no exame atual?",
+      "question_es": "¿Se describen calcificaciones en el examen actual?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 3,
+      "field": "has_mass",
+      "question_pt": "Há massa ou nódulo descrito no exame atual?",
+      "question_es": "¿Se describe una masa o nódulo en el examen actual?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 4,
+      "field": "calc_morph_fine_linear_branching",
+      "question_pt": "A morfologia das calcificações é fine linear ou fine-linear branching?",
+      "question_es": "¿La morfología de las calcificaciones es fine linear o fine-linear branching?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 5,
+      "field": "calc_morph_fine_pleomorphic",
+      "question_pt": "A morfologia das calcificações é fine pleomorphic?",
+      "question_es": "¿La morfología de las calcificaciones es fine pleomorphic?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 6,
+      "field": "calc_morph_typically_benign",
+      "question_pt": "As calcificações têm morfologia tipicamente benigna?",
+      "question_es": "¿Las calcificaciones tienen morfología típicamente benigna?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 7,
+      "field": "calc_dist_segmental",
+      "question_pt": "A distribuição das calcificações é segmentar?",
+      "question_es": "¿La distribución de las calcificaciones es segmentaria?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 8,
+      "field": "calc_dist_linear",
+      "question_pt": "A distribuição das calcificações é linear/ductal?",
+      "question_es": "¿La distribución de las calcificaciones es lineal/ductal?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 9,
+      "field": "calc_dist_grouped",
+      "question_pt": "A distribuição das calcificações é agrupada/clustered?",
+      "question_es": "¿La distribución de las calcificaciones es agrupada/clustered?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 10,
+      "field": "mass_margin_spiculated",
+      "question_pt": "A margem da massa ou nódulo é espiculada?",
+      "question_es": "¿El margen de la masa o nódulo es espiculado?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 11,
+      "field": "mass_shape_irregular",
+      "question_pt": "A forma da massa ou nódulo é irregular?",
+      "question_es": "¿La forma de la masa o nódulo es irregular?",
+      "answer_type": "boolean"
+    },
+    {
+      "id": 12,
+      "field": "mass_size_mm",
+      "question_pt": "Qual é o tamanho da massa ou nódulo em milímetros?",
+      "question_es": "¿Cuál es el tamaño de la masa o nódulo en milímetros?",
+      "answer_type": "number"
+    },
+    {
+      "id": 13,
+      "field": "nodule_location",
+      "question_pt": "Qual a localização do nódulo ou massa na mama?",
+      "question_es": "¿Cuál es la ubicación del nódulo o masa en la mama?",
+      "answer_type": "categorical"
+    }
+  ]
+}
