@@ -43,12 +43,13 @@ def test_birads_terms_no_terms_in_original():
 # --- Audit response parsing tests ---
 
 def test_parse_audit_response_valid_json():
-    """Parse valid JSON audit response."""
-    response = '{"aprovado": true, "score": 9, "inconsistencias": []}'
+    """Parse valid JSON audit response with per-criterion data."""
+    response = '{"aprovado": true, "score": 10, "criterios": {"C1_descritores_birads": {"ok": true}, "C2_categoria_birads": {"ok": true}}, "inconsistencias": []}'
     result = parse_audit_response(response)
     assert result["aprovado"] is True
-    assert result["score"] == 9
+    assert result["score"] == 10
     assert result["inconsistencias"] == []
+    assert result["criterios"]["C1_descritores_birads"]["ok"] is True
 
 
 def test_parse_audit_response_markdown_block():

@@ -77,11 +77,11 @@ def _create_test_fixtures(tmp_dir: Path) -> dict:
     return config
 
 
-# Mock the translator to return Portuguese text, and the auditor to return approval JSON
+# Mock the translator to return Portuguese text, and the auditor to return structured audit JSON
 def _mock_generate(prompt, temperature=0):
     """Mock generate that returns translation or audit depending on prompt content."""
     if "RESULTADO DA AUDITORIA" in prompt:
-        return '{"aprovado": true, "score": 9, "inconsistencias": []}'
+        return '{"aprovado": true, "score": 10, "criterios": {"C1_descritores_birads": {"ok": true}, "C2_categoria_birads": {"ok": true}, "C3_medidas_numeros": {"ok": true}, "C4_lateralidade_localizacao": {"ok": true}, "C5_omissoes_adicoes": {"ok": true}, "C6_inversoes_negacao": {"ok": true}, "C7_temporais_achados": {"ok": true}}, "inconsistencias": []}'
     return "Observa-se um nodulo na mama direita."
 
 
@@ -116,8 +116,14 @@ def test_pipeline_produces_output_files(mock_similarity, mock_generate, tmp_path
     assert stats["translated_successfully"] == 2
     assert stats["audit_approved"] == 2
 
-    # Check audit results
+    # Check audit results are fully auditable
     with open(config["audit_path"], encoding="utf-8") as f:
         audits = json.load(f)
     assert len(audits) == 2
     assert all(a["audit"]["aprovado"] for a in audits)
+    # Each audit entry contains original, translation, raw response for auditability
+    for a in audits:
+        assert "original_text" in a
+        assert "translated_text" in a
+        assert "audit_raw_response" in a
+        assert "criterios" in a["audit"]

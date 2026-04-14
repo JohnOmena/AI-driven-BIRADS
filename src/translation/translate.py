@@ -82,7 +82,10 @@ def audit_report(
         try:
             response = client.generate(prompt, temperature=temperature)
             if response and response.strip():
-                return parse_audit_response(response.strip())
+                raw_text = response.strip()
+                parsed = parse_audit_response(raw_text)
+                parsed["_raw_response"] = raw_text
+                return parsed
         except RuntimeError:
             raise  # Cost limit - don't retry
         except Exception as e:
@@ -202,9 +205,15 @@ def run_translation(config: dict) -> None:
             "status": status,
         })
 
+        # Separate raw response for auditability
+        raw_response = audit_data.pop("_raw_response", "")
+
         audit_results.append({
             "report_id": report_id,
+            "original_text": report_text,
+            "translated_text": translation,
             "audit": audit_data,
+            "audit_raw_response": raw_response,
             "terms_check": {
                 "match_ratio": round(terms_check["match_ratio"], 4),
                 "missing_terms": terms_check["missing_terms"],

@@ -70,20 +70,33 @@ def test_audit_prompt_contains_both_texts():
     assert translated in prompt
 
 
-def test_audit_prompt_contains_criteria():
-    """The audit prompt must include fidelity, lexicon, and number checks."""
+def test_audit_prompt_contains_all_criteria():
+    """The audit prompt must include all 7 criteria."""
     original = "Texto."
     translated = "Texto."
     glossary_text = ""
     prompt = build_audit_prompt(original, translated, glossary_text)
     prompt_lower = prompt.lower()
-    assert "fidelidade" in prompt_lower
-    assert "lexico" in prompt_lower or "bi-rads" in prompt_lower.replace("-", "")
-    assert "numero" in prompt_lower or "medida" in prompt_lower
+    # C1: BI-RADS descriptors
+    assert "descritores" in prompt_lower
+    assert "forma" in prompt_lower and "margem" in prompt_lower
+    # C2: BI-RADS category
+    assert "categoria" in prompt_lower
+    # C3: Measures and numbers
+    assert "medida" in prompt_lower or "numerico" in prompt_lower
+    # C4: Laterality
+    assert "lateralidade" in prompt_lower
+    # C5: Omissions and additions
+    assert "omiss" in prompt_lower
+    # C6: Sense inversion and negation errors
+    assert "negacao" in prompt_lower or "negacao" in prompt_lower
+    assert "invers" in prompt_lower
+    # C7: Temporal comparisons
+    assert "temporal" in prompt_lower or "anteriores" in prompt_lower
 
 
-def test_audit_prompt_requests_json():
-    """The audit prompt must request JSON output with aprovado/score/inconsistencias."""
+def test_audit_prompt_requests_structured_json():
+    """The audit prompt must request per-criterion JSON with aprovado/score/criterios."""
     original = "Texto."
     translated = "Texto."
     glossary_text = ""
@@ -91,3 +104,6 @@ def test_audit_prompt_requests_json():
     assert "aprovado" in prompt
     assert "score" in prompt
     assert "inconsistencias" in prompt
+    assert "criterios" in prompt
+    assert "C1_descritores_birads" in prompt
+    assert "C6_inversoes_negacao" in prompt
