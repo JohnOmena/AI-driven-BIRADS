@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "source": "ACR BI-RADS Atlas, 5th Edition",
+    "description": "Bilingual glossary ES↔PT for BI-RADS mammography terminology"
+  },
+  "terms": {
+    "anatomy": [
+      {"es": "mama derecha", "pt": "mama direita"},
+      {"es": "mama izquierda", "pt": "mama esquerda"},
+      {"es": "cuadrante superior externo", "pt": "quadrante superior externo"},
+      {"es": "cuadrante superior interno", "pt": "quadrante superior interno"},
+      {"es": "cuadrante inferior externo", "pt": "quadrante inferior externo"},
+      {"es": "cuadrante inferior interno", "pt": "quadrante inferior interno"},
+      {"es": "retroareolar", "pt": "retroareolar"},
+      {"es": "prolongación axilar", "pt": "prolongamento axilar"},
+      {"es": "región axilar", "pt": "região axilar"},
+      {"es": "pezón", "pt": "mamilo"},
+      {"es": "mamelón", "pt": "mamilo"},
+      {"es": "areola", "pt": "aréola"},
+      {"es": "conducto", "pt": "ducto"},
+      {"es": "piel", "pt": "pele"},
+      {"es": "tejido glandular", "pt": "tecido glandular"},
+      {"es": "tejido adiposo", "pt": "tecido adiposo"},
+      {"es": "plano posterior", "pt": "plano posterior"},
+      {"es": "región pectoaxilar", "pt": "região pectoaxilar"}
+    ],
+    "findings_mass": [
+      {"es": "nódulo", "pt": "nódulo"},
+      {"es": "masa", "pt": "massa"},
+      {"es": "imagen nodular", "pt": "imagem nodular"},
+      {"es": "formación nodular", "pt": "formação nodular"},
+      {"es": "lesión nodular", "pt": "lesão nodular"},
+      {"es": "asimetría", "pt": "assimetria"},
+      {"es": "asimetría focal", "pt": "assimetria focal"},
+      {"es": "asimetría global", "pt": "assimetria global"},
+      {"es": "distorsión arquitectural", "pt": "distorção arquitetural"},
+      {"es": "densidad asimétrica", "pt": "densidade assimétrica"}
+    ],
+    "findings_calcification": [
+      {"es": "calcificación", "pt": "calcificação"},
+      {"es": "calcificaciones", "pt": "calcificações"},
+      {"es": "microcalcificación", "pt": "microcalcificação"},
+      {"es": "microcalcificaciones", "pt": "microcalcificações"},
+      {"es": "macrocalcificación", "pt": "macrocalcificação"}
+    ],
+    "morphology": [
+      {"es": "espiculado", "pt": "espiculado"},
+      {"es": "espiculada", "pt": "espiculada"},
+      {"es": "circunscrito", "pt": "circunscrito"},
+      {"es": "circunscrita", "pt": "circunscrita"},
+      {"es": "irregular", "pt": "irregular"},
+      {"es": "ovalado", "pt": "ovalado"},
+      {"es": "ovalada", "pt": "ovalada"},
+      {"es": "redondo", "pt": "redondo"},
+      {"es": "redonda", "pt": "redonda"},
+      {"es": "lobulado", "pt": "lobulado"},
+      {"es": "lobulada", "pt": "lobulada"},
+      {"es": "microlobulado", "pt": "microlobulado"},
+      {"es": "obscurecido", "pt": "obscurecido"},
+      {"es": "indistinto", "pt": "indistinto"},
+      {"es": "isodenso", "pt": "isodenso"},
+      {"es": "isodensos", "pt": "isodensos"},
+      {"es": "hipodenso", "pt": "hipodenso"},
+      {"es": "hiperdenso", "pt": "hiperdenso"},
+      {"es": "heterogéneo", "pt": "heterogêneo"},
+      {"es": "homogéneo", "pt": "homogêneo"},
+      {"es": "pleomórfico", "pt": "pleomórfico"},
+      {"es": "amorfo", "pt": "amorfo"},
+      {"es": "puntiforme", "pt": "puntiforme"},
+      {"es": "lineal fino", "pt": "linear fino"},
+      {"es": "ramificado", "pt": "ramificado"}
+    ],
+    "distribution": [
+      {"es": "agrupada", "pt": "agrupada"},
+      {"es": "segmentaria", "pt": "segmentar"},
+      {"es": "lineal", "pt": "linear"},
+      {"es": "regional", "pt": "regional"},
+      {"es": "difusa", "pt": "difusa"},
+      {"es": "ductal", "pt": "ductal"}
+    ],
+    "density": [
+      {"es": "composición mamaria", "pt": "composição mamária"},
+      {"es": "predominantemente adiposa", "pt": "predominantemente adiposa"},
+      {"es": "densidades fibroglandulares dispersas", "pt": "densidades fibroglandulares dispersas"},
+      {"es": "heterogéneamente densa", "pt": "heterogeneamente densa"},
+      {"es": "extremadamente densa", "pt": "extremamente densa"},
+      {"es": "tipo A", "pt": "tipo A"},
+      {"es": "tipo B", "pt": "tipo B"},
+      {"es": "tipo C", "pt": "tipo C"},
+      {"es": "tipo D", "pt": "tipo D"}
+    ],
+    "assessment": [
+      {"es": "BI-RADS", "pt": "BI-RADS"},
+      {"es": "benigno", "pt": "benigno"},
+      {"es": "benigna", "pt": "benigna"},
+      {"es": "maligno", "pt": "maligno"},
+      {"es": "maligna", "pt": "maligna"},
+      {"es": "sospechoso", "pt": "suspeito"},
+      {"es": "sospechosa", "pt": "suspeita"},
+      {"es": "probablemente benigno", "pt": "provavelmente benigno"},
+      {"es": "hallazgo", "pt": "achado"},
+      {"es": "hallazgos", "pt": "achados"}
+    ],
+    "procedure": [
+      {"es": "mamografía", "pt": "mamografia"},
+      {"es": "ecografía", "pt": "ecografia"},
+      {"es": "ultrasonido", "pt": "ultrassonografia"},
+      {"es": "biopsia", "pt": "biópsia"},
+      {"es": "incidencia", "pt": "incidência"},
+      {"es": "cráneo-caudal", "pt": "craniocaudal"},
+      {"es": "medio lateral oblicua", "pt": "médio-lateral oblíqua"},
+      {"es": "prótesis", "pt": "prótese"},
+      {"es": "implante", "pt": "implante"},
+      {"es": "ganglio linfático", "pt": "linfonodo"},
+      {"es": "ganglios linfáticos", "pt": "linfonodos"},
+      {"es": "ganglio linfático intramamario", "pt": "linfonodo intramamário"}
+    ]
+  }
+}
