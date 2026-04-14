@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+*.env
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Large binary files
+*.npy
+*.pkl
+
+# Claude/Serena internal
+.claude/
+.serena/
