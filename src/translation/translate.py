@@ -185,9 +185,24 @@ def run_translation(config: dict) -> None:
     translation_records = []
     audit_results = []
 
+    # Session counters for periodic summary
+    session = {
+        "processed": 0,
+        "approved": 0,
+        "review": 0,
+        "rejected": 0,
+        "failed": 0,
+        "corrected": 0,
+        "correction_accepted": 0,
+        "audit_false_positives": 0,
+        "postprocess_fixes": 0,
+    }
+    summary_interval = 15
+
     pending = df[~df["report_id"].astype(str).isin(done_ids)]
     print(f"\n  Reports to process: {len(pending)}")
     print(f"  Temperature: {config['temperature']}")
+    print(f"  Summary every: {summary_interval} reports")
     print()
 
     for idx, row in tqdm(pending.iterrows(), total=len(pending), desc="Translating"):
@@ -211,6 +226,8 @@ def run_translation(config: dict) -> None:
                 "term_match_ratio": 0.0,
                 "status": "failed",
             })
+            session["processed"] += 1
+            session["failed"] += 1
             continue
 
         # Step 2: Post-process translation (fix known Gemini patterns)
@@ -317,6 +334,37 @@ def run_translation(config: dict) -> None:
             "status": status,
         }
         audit_results.append(audit_entry)
+
+        # Update session counters
+        session["processed"] += 1
+        session[status] += 1
+        if pp_fixes:
+            session["postprocess_fixes"] += 1
+        if correction_history:
+            session["corrected"] += 1
+            if len(correction_history) >= 2:
+                session["correction_accepted"] += 1
+        if audit_validation and audit_validation["rejected"]:
+            session["audit_false_positives"] += len(audit_validation["rejected"])
+
+        # Periodic summary
+        if session["processed"] % summary_interval == 0:
+            tqdm.write("")
+            tqdm.write("-" * 60)
+            tqdm.write(f"  RESUMO - Ultimos {summary_interval} laudos (total sessao: {session['processed']})")
+            tqdm.write("-" * 60)
+            tqdm.write(f"  Aprovados:           {session['approved']}")
+            tqdm.write(f"  Em revisao:          {session['review']}")
+            tqdm.write(f"  Rejeitados:          {session['rejected']}")
+            tqdm.write(f"  Falhas:              {session['failed']}")
+            tqdm.write(f"  Pos-processados:     {session['postprocess_fixes']}")
+            tqdm.write(f"  Correcoes enviadas:  {session['corrected']}")
+            tqdm.write(f"  Correcoes aceitas:   {session['correction_accepted']}")
+            tqdm.write(f"  Falsos positivos DS: {session['audit_false_positives']}")
+            tqdm.write(f"  Custo tradutor:      ${client_translator.total_cost_usd:.4f}")
+            tqdm.write(f"  Custo auditor:       ${client_auditor.total_cost_usd:.4f}")
+            tqdm.write("-" * 60)
+            tqdm.write("")
 
         # Save periodically
         if (len(translation_records) % config["batch_size"] == 0) or (idx == pending.index[-1]):
