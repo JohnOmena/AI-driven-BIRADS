@@ -75,10 +75,11 @@ class LLMClient:
         )
         # Track usage
         usage = response.usage_metadata
-        self._update_usage(
-            input_tokens=usage.prompt_token_count,
-            output_tokens=usage.candidates_token_count,
-        )
+        if usage:
+            self._update_usage(
+                input_tokens=usage.prompt_token_count or 0,
+                output_tokens=usage.candidates_token_count or 0,
+            )
         return response.text
 
     def _generate_openai(self, prompt: str, temperature: float) -> str:
@@ -97,10 +98,11 @@ class LLMClient:
         )
         # Track usage
         usage = response.usage
-        self._update_usage(
-            input_tokens=usage.prompt_tokens,
-            output_tokens=usage.completion_tokens,
-        )
+        if usage:
+            self._update_usage(
+                input_tokens=usage.prompt_tokens or 0,
+                output_tokens=usage.completion_tokens or 0,
+            )
         return response.choices[0].message.content
 
     def get_usage_report(self) -> dict:
