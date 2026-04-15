@@ -21,7 +21,7 @@ from tqdm import tqdm
 
 from src.translation.config import CONFIG, parse_args
 from src.translation.glossary import load_glossary, format_glossary_for_prompt
-from src.translation.prompt import build_translation_prompt, build_audit_prompt
+from src.translation.prompt import build_translation_prompt, build_audit_prompt, build_correction_prompt
 from src.translation.client import create_client, LLMClient
 from src.translation.validate import (
     compute_similarity,
@@ -60,6 +60,37 @@ def translate_report(
             raise  # Cost limit - don't retry
         except Exception as e:
             print(f"  Attempt {attempt + 1}/{max_retries} failed for {client.name}: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+    return None
+
+
+def correct_translation(
+    original_text: str,
+    translated_text: str,
+    inconsistencies: list[dict],
+    client: LLMClient,
+    glossary_text: str,
+    temperature: float,
+    max_retries: int = 3,
+) -> str | None:
+    """Ask the translator to fix specific issues found by the auditor.
+
+    Returns corrected translation, or None if all retries fail.
+    """
+    prompt = build_correction_prompt(
+        original_text, translated_text, inconsistencies, glossary_text,
+    )
+
+    for attempt in range(max_retries):
+        try:
+            response = client.generate(prompt, temperature=temperature)
+            if response and response.strip():
+                return response.strip()
+        except RuntimeError:
+            raise
+        except Exception as e:
+            print(f"  Correction attempt {attempt + 1}/{max_retries} failed: {e}")
             if attempt < max_retries - 1:
                 time.sleep(2 ** attempt)
     return None
@@ -190,12 +221,53 @@ def run_translation(config: dict) -> None:
             config["temperature"], config["max_retries"],
         )
 
-        # Step 4: Compute additional metrics
+        audit_data = audit or {"aprovado": False, "score": 0, "inconsistencias": [{"criterio": "audit_failed", "problema": "Auditor did not respond"}]}
+        correction_history = []
+
+        # Step 4: Correction loop — if DeepSeek rejects, ask Gemini to fix
+        if not audit_data.get("aprovado") and audit_data.get("inconsistencias"):
+            inconsistencies = audit_data["inconsistencias"]
+            correction_history.append({
+                "round": 0,
+                "score": audit_data.get("score", 0),
+                "inconsistencias": inconsistencies,
+            })
+
+            corrected = correct_translation(
+                report_text, translation, inconsistencies,
+                client_translator, glossary_text,
+                config["temperature"], config["max_retries"],
+            )
+
+            if corrected:
+                # Post-process the correction too
+                corrected, corr_pp_fixes = postprocess_translation(report_text, corrected)
+                pp_fixes.extend(corr_pp_fixes)
+
+                # Re-audit the corrected version
+                re_audit = audit_report(
+                    report_text, corrected, client_auditor, glossary_text,
+                    config["temperature"], config["max_retries"],
+                )
+
+                if re_audit:
+                    re_audit_data = re_audit
+                    correction_history.append({
+                        "round": 1,
+                        "score": re_audit_data.get("score", 0),
+                        "inconsistencias": re_audit_data.get("inconsistencias", []),
+                    })
+
+                    # Accept correction if it improved
+                    if re_audit_data.get("score", 0) >= audit_data.get("score", 0):
+                        translation = corrected
+                        audit_data = re_audit_data
+
+        # Step 5: Compute additional metrics
         similarity = compute_similarity(report_text, translation)
         terms_check = check_birads_terms_preserved(report_text, translation, glossary_pairs)
 
-        # Step 5: Classify
-        audit_data = audit or {"aprovado": False, "score": 0, "inconsistencias": [{"criterio": "audit_failed", "problema": "Auditor did not respond"}]}
+        # Step 6: Classify
         status = classify_translation(audit_data, similarity, terms_check["match_ratio"])
 
         translation_records.append({
@@ -219,6 +291,7 @@ def run_translation(config: dict) -> None:
             "audit": audit_data,
             "audit_raw_response": raw_response,
             "postprocess_fixes": pp_fixes,
+            "correction_history": correction_history,
             "terms_check": {
                 "match_ratio": round(terms_check["match_ratio"], 4),
                 "missing_terms": terms_check["missing_terms"],

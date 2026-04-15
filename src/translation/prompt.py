@@ -46,6 +46,64 @@ TRADUCAO (Portugues do Brasil):"""
     return prompt
 
 
+def build_correction_prompt(
+    original_text: str,
+    translated_text: str,
+    inconsistencies: list[dict],
+    glossary_text: str,
+) -> str:
+    """Build a prompt for the translator to correct a rejected translation.
+
+    Uses specific feedback from the auditor to guide targeted fixes.
+
+    Args:
+        original_text: The original Spanish mammography report.
+        translated_text: The current Portuguese translation with issues.
+        inconsistencies: List of issues found by the auditor.
+        glossary_text: Formatted glossary of BI-RADS terms ES->PT.
+
+    Returns:
+        Complete prompt string for the translator LLM to fix the translation.
+    """
+    issues_text = ""
+    for inc in inconsistencies:
+        criterio = inc.get("criterio", "")
+        problema = inc.get("problema", "")
+        original_snippet = inc.get("original", "")
+        traducao_snippet = inc.get("traducao", "")
+        issue_line = f"- [{criterio}] {problema}"
+        if original_snippet:
+            issue_line += f'\n  Original: "{original_snippet}"'
+        if traducao_snippet:
+            issue_line += f'\n  Traducao com erro: "{traducao_snippet}"'
+        issues_text += issue_line + "\n"
+
+    prompt = f"""Voce e um tradutor medico especializado em radiologia mamaria e no sistema BI-RADS (ACR BI-RADS Atlas, 5a Edicao).
+
+Uma traducao anterior deste laudo foi REPROVADA pela auditoria de qualidade. Sua tarefa e CORRIGIR a traducao, resolvendo APENAS os problemas apontados abaixo, sem alterar o restante do texto.
+
+PROBLEMAS ENCONTRADOS NA AUDITORIA:
+{issues_text}
+
+REGRAS DE CORRECAO:
+1. Corrigir APENAS os problemas listados acima.
+2. Manter TODO o restante da traducao inalterado.
+3. Preservar a terminologia BI-RADS conforme o glossario.
+4. Preservar exatamente medidas, lateralidade, categorias BI-RADS e formatacao.
+5. Retornar APENAS o texto traduzido corrigido, sem explicacoes.
+
+{glossary_text}
+
+LAUDO ORIGINAL (Espanhol):
+{original_text}
+
+TRADUCAO COM PROBLEMAS:
+{translated_text}
+
+TRADUCAO CORRIGIDA (Portugues do Brasil):"""
+    return prompt
+
+
 def build_audit_prompt(original_text: str, translated_text: str, glossary_text: str) -> str:
     """Build an audit prompt for the validator LLM to check translation quality.
 

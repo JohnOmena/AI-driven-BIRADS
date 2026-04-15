@@ -1,6 +1,6 @@
-"""Tests for translation and audit prompt construction."""
+"""Tests for translation, audit, and correction prompt construction."""
 
-from src.translation.prompt import build_translation_prompt, build_audit_prompt
+from src.translation.prompt import build_translation_prompt, build_audit_prompt, build_correction_prompt
 
 
 # --- Translation prompt tests ---
@@ -107,3 +107,40 @@ def test_audit_prompt_requests_structured_json():
     assert "criterios" in prompt
     assert "C1_descritores_birads" in prompt
     assert "C6_inversoes_negacao" in prompt
+
+
+# --- Correction prompt tests ---
+
+def test_correction_prompt_contains_both_texts():
+    """The correction prompt must include original and current translation."""
+    original = "Se observa un nodulo en mama derecha."
+    translated = "Observa-se um nodulo na mama esquerda."
+    inconsistencies = [{"criterio": "C4", "problema": "lateralidade invertida"}]
+    prompt = build_correction_prompt(original, translated, inconsistencies, "")
+    assert original in prompt
+    assert translated in prompt
+
+
+def test_correction_prompt_contains_issues():
+    """The correction prompt must include the auditor's feedback."""
+    original = "Texto."
+    translated = "Texto traduzido."
+    inconsistencies = [
+        {"criterio": "C1", "problema": "descritor incorreto", "original": "ovalado", "traducao": "oval"},
+        {"criterio": "C4", "problema": "lateralidade invertida"},
+    ]
+    prompt = build_correction_prompt(original, translated, inconsistencies, "")
+    assert "descritor incorreto" in prompt
+    assert "lateralidade invertida" in prompt
+    assert "ovalado" in prompt
+
+
+def test_correction_prompt_instructs_targeted_fix():
+    """The correction prompt must instruct to fix only the reported issues."""
+    original = "Texto."
+    translated = "Texto."
+    inconsistencies = [{"criterio": "C1", "problema": "erro"}]
+    prompt = build_correction_prompt(original, translated, inconsistencies, "")
+    prompt_lower = prompt.lower()
+    assert "apenas" in prompt_lower or "somente" in prompt_lower
+    assert "bi-rads" in prompt_lower
