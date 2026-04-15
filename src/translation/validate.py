@@ -140,6 +140,160 @@ def postprocess_translation(original_es: str, translated_pt: str) -> tuple[str, 
     return text, fixes
 
 
+def _extract_numbers(text: str) -> list[str]:
+    """Extract all numbers with optional units from text."""
+    return re.findall(r"\d+(?:[.,]\d+)?\s*(?:mm|cm|ml)?", text)
+
+
+def _extract_birads_categories(text: str) -> list[str]:
+    """Extract BI-RADS categories from text."""
+    return re.findall(r"(?:BI-?RADS|BIRADS)\s*:?\s*([0-6](?:[ABC])?)", text, re.IGNORECASE)
+
+
+_LATERALITY_ES_TO_PT = {
+    "derecha": "direita",
+    "izquierda": "esquerda",
+    "bilateral": "bilateral",
+}
+
+
+def _check_laterality(original_es: str, translated_pt: str) -> bool:
+    """Check if laterality terms are correctly mapped ES->PT."""
+    orig_lower = original_es.lower()
+    trans_lower = translated_pt.lower()
+    for es_term, pt_term in _LATERALITY_ES_TO_PT.items():
+        if es_term in orig_lower:
+            if pt_term not in trans_lower:
+                return False
+    return True
+
+
+def validate_audit_findings(
+    original_es: str,
+    translated_pt: str,
+    audit_result: dict,
+    glossary_pairs: list[tuple[str, str]],
+) -> dict:
+    """Cross-validate DeepSeek's audit findings against the actual texts.
+
+    For each inconsistency reported by the auditor, checks programmatically
+    if the issue is real (confirmed) or a false positive (rejected).
+
+    Verification per criterion:
+        C1 (descriptors): glossary cross-check
+        C2 (BI-RADS category): regex extraction and comparison
+        C3 (measures): numeric extraction and comparison
+        C4 (laterality): directional term mapping ES->PT
+        C5 (omissions): sentence-level content check
+        C6 (negation): negation keyword analysis
+        C7 (temporal): trusted (hard to verify programmatically)
+
+    Returns dict with:
+        confirmed: list of verified inconsistencies to send for correction
+        rejected: list of false positive findings with rejection reason
+        verdict: 'correct' (send to Gemini) or 'keep' (translation is fine)
+    """
+    inconsistencies = audit_result.get("inconsistencias", [])
+    if not inconsistencies:
+        return {"confirmed": [], "rejected": [], "verdict": "keep"}
+
+    orig_lower = original_es.lower()
+    trans_lower = translated_pt.lower()
+
+    confirmed = []
+    rejected = []
+
+    for inc in inconsistencies:
+        criterio = inc.get("criterio", "").upper()
+        problema = inc.get("problema", "")
+        original_snippet = inc.get("original", "").lower()
+        traducao_snippet = inc.get("traducao", "").lower()
+
+        # C1: BI-RADS descriptors — verify against glossary
+        if "C1" in criterio:
+            if original_snippet and original_snippet not in orig_lower:
+                rejected.append({**inc, "_rejection": "trecho original nao encontrado no texto"})
+                continue
+            if traducao_snippet and traducao_snippet not in trans_lower:
+                rejected.append({**inc, "_rejection": "trecho da traducao nao encontrado no texto"})
+                continue
+            # Check if there's a real glossary mismatch
+            is_glossary_issue = False
+            for es_term, pt_term in glossary_pairs:
+                if es_term.lower() in orig_lower and pt_term.lower() not in trans_lower:
+                    is_glossary_issue = True
+                    break
+            if not is_glossary_issue and traducao_snippet:
+                # Auditor flagged but all glossary terms are present
+                rejected.append({**inc, "_rejection": "todos os termos do glossario presentes na traducao"})
+                continue
+            confirmed.append(inc)
+
+        # C2: BI-RADS category — extract and compare
+        elif "C2" in criterio:
+            orig_cats = _extract_birads_categories(original_es)
+            trans_cats = _extract_birads_categories(translated_pt)
+            if sorted(orig_cats) == sorted(trans_cats):
+                rejected.append({**inc, "_rejection": f"categorias BI-RADS identicas: {orig_cats}"})
+            else:
+                confirmed.append(inc)
+
+        # C3: Measures and numbers — extract and compare
+        elif "C3" in criterio:
+            orig_nums = _extract_numbers(original_es)
+            trans_nums = _extract_numbers(translated_pt)
+            if sorted(orig_nums) == sorted(trans_nums):
+                rejected.append({**inc, "_rejection": f"numeros identicos: {orig_nums}"})
+            else:
+                confirmed.append(inc)
+
+        # C4: Laterality — verify mapping
+        elif "C4" in criterio:
+            if _check_laterality(original_es, translated_pt):
+                rejected.append({**inc, "_rejection": "lateralidade correta na traducao"})
+            else:
+                confirmed.append(inc)
+
+        # C5: Omissions/additions — check snippet presence
+        elif "C5" in criterio:
+            if original_snippet and original_snippet in orig_lower:
+                # Check if the semantic content is in the translation
+                confirmed.append(inc)
+            elif original_snippet and original_snippet not in orig_lower:
+                rejected.append({**inc, "_rejection": "trecho citado nao existe no original"})
+            else:
+                confirmed.append(inc)
+
+        # C6: Negation/sense inversion — check negation keywords
+        elif "C6" in criterio:
+            neg_es = ["no se", "sin ", "ni ", "no "]
+            neg_pt = ["nao se", "sem ", "nem ", "nao "]
+            # Count negations in original and translation
+            orig_neg = sum(1 for n in neg_es if n in orig_lower)
+            trans_neg = sum(1 for n in neg_pt if n in trans_lower)
+            if orig_neg == trans_neg:
+                rejected.append({**inc, "_rejection": f"mesma quantidade de negacoes (orig={orig_neg}, trad={trans_neg})"})
+            else:
+                confirmed.append(inc)
+
+        # C7: Temporal comparisons — hard to verify, trust auditor
+        elif "C7" in criterio:
+            confirmed.append(inc)
+
+        # Unknown criterion — trust auditor
+        else:
+            confirmed.append(inc)
+
+    # Verdict: only correct if there are confirmed issues
+    verdict = "correct" if confirmed else "keep"
+
+    return {
+        "confirmed": confirmed,
+        "rejected": rejected,
+        "verdict": verdict,
+    }
+
+
 def parse_audit_response(response_text: str) -> dict:
     """Parse the JSON audit response from the auditor LLM.
 

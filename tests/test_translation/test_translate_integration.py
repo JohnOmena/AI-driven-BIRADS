@@ -128,6 +128,8 @@ def test_pipeline_produces_output_files(mock_similarity, mock_generate, tmp_path
         assert "audit_raw_response" in a
         assert "criterios" in a["audit"]
         assert "correction_history" in a
+        # audit_validation is None when auditor approved (no validation needed)
+        assert "audit_validation" in a
 
 
 # --- Correction loop integration test ---
@@ -136,29 +138,34 @@ _correction_call_count = 0
 
 
 def _mock_generate_with_rejection(prompt, temperature=0):
-    """Mock that rejects the first audit, then approves after correction."""
+    """Mock that rejects first audit (laterality error), then approves after correction.
+
+    Scenario: Gemini translates 'mama derecha' as 'mama esquerda' (wrong).
+    DeepSeek catches C4 laterality inversion. Validation confirms (derecha!=esquerda).
+    Gemini corrects to 'mama direita'. DeepSeek re-approves.
+    """
     global _correction_call_count
 
     if "RESULTADO DA AUDITORIA" in prompt:
         _correction_call_count += 1
         if _correction_call_count <= 2:
-            # First audit: reject with inconsistencies
-            return '{"aprovado": false, "score": 7, "criterios": {"C1_descritores_birads": {"ok": false, "nota": "margens obscurecidos -> obscurecidas"}}, "inconsistencias": [{"criterio": "C1", "problema": "concordancia de genero incorreta", "original": "margenes oscurecidos", "traducao": "margens obscurecidos"}]}'
+            # First audit: reject with laterality error (verifiable by validation)
+            return '{"aprovado": false, "score": 6, "criterios": {"C4_lateralidade_localizacao": {"ok": false, "nota": "mama derecha traduzida como mama esquerda"}}, "inconsistencias": [{"criterio": "C4", "problema": "lateralidade invertida: derecha -> esquerda", "original": "mama derecha", "traducao": "mama esquerda"}]}'
         # Re-audit after correction: approve
-        return '{"aprovado": true, "score": 10, "criterios": {"C1_descritores_birads": {"ok": true}}, "inconsistencias": []}'
+        return '{"aprovado": true, "score": 10, "criterios": {"C4_lateralidade_localizacao": {"ok": true}}, "inconsistencias": []}'
 
     if "PROBLEMAS ENCONTRADOS" in prompt:
         # Correction prompt: return fixed translation
-        return "Observa-se um nodulo na mama direita com margens obscurecidas."
+        return "Observa-se um nodulo na mama direita."
 
-    # Translation prompt
-    return "Observa-se um nodulo na mama direita com margens obscurecidos."
+    # Translation prompt: intentionally wrong laterality
+    return "Observa-se um nodulo na mama esquerda."
 
 
 @patch("src.translation.client.LLMClient.generate", side_effect=_mock_generate_with_rejection)
 @patch("src.translation.validate.compute_similarity", return_value=0.95)
 def test_pipeline_correction_loop(mock_similarity, mock_generate, tmp_path):
-    """Pipeline corrects translation when DeepSeek rejects and re-audits."""
+    """Pipeline validates audit, corrects, and re-audits when DeepSeek finds real issues."""
     global _correction_call_count
     _correction_call_count = 0
 
@@ -174,16 +181,22 @@ def test_pipeline_correction_loop(mock_similarity, mock_generate, tmp_path):
     translated = pd.read_csv(config["output_path"], encoding="utf-8")
     assert len(translated) == 2
 
-    # Check audit results have correction history
+    # Check audit results
     with open(config["audit_path"], encoding="utf-8") as f:
         audits = json.load(f)
 
-    # At least one report should have a correction history
+    # At least one report should have correction history
     reports_with_corrections = [a for a in audits if a.get("correction_history")]
     assert len(reports_with_corrections) > 0
 
-    # The corrected report should show improvement
+    # Verify the validation gate worked
     corrected = reports_with_corrections[0]
     history = corrected["correction_history"]
     assert len(history) >= 1
     assert history[0]["round"] == 0  # Initial rejection
+    # Validation must be present and must have confirmed the finding
+    assert history[0]["validation"]["verdict"] == "correct"
+    assert history[0]["validation"]["confirmed"] >= 1
+
+    # Verify audit_validation is recorded
+    assert corrected["audit_validation"] is not None or len(history) >= 2

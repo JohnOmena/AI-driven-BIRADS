@@ -29,6 +29,7 @@ from src.translation.validate import (
     parse_audit_response,
     classify_translation,
     postprocess_translation,
+    validate_audit_findings,
 )
 
 
@@ -223,45 +224,55 @@ def run_translation(config: dict) -> None:
 
         audit_data = audit or {"aprovado": False, "score": 0, "inconsistencias": [{"criterio": "audit_failed", "problema": "Auditor did not respond"}]}
         correction_history = []
+        audit_validation = None
 
-        # Step 4: Correction loop — if DeepSeek rejects, ask Gemini to fix
+        # Step 4: If DeepSeek rejects, validate its findings before correcting
         if not audit_data.get("aprovado") and audit_data.get("inconsistencias"):
-            inconsistencies = audit_data["inconsistencias"]
+            # Step 4a: Cross-validate DeepSeek's findings against actual texts
+            audit_validation = validate_audit_findings(
+                report_text, translation, audit_data, glossary_pairs,
+            )
+
             correction_history.append({
                 "round": 0,
                 "score": audit_data.get("score", 0),
-                "inconsistencias": inconsistencies,
+                "inconsistencias": audit_data["inconsistencias"],
+                "validation": {
+                    "verdict": audit_validation["verdict"],
+                    "confirmed": len(audit_validation["confirmed"]),
+                    "rejected": len(audit_validation["rejected"]),
+                },
             })
 
-            corrected = correct_translation(
-                report_text, translation, inconsistencies,
-                client_translator, glossary_text,
-                config["temperature"], config["max_retries"],
-            )
-
-            if corrected:
-                # Post-process the correction too
-                corrected, corr_pp_fixes = postprocess_translation(report_text, corrected)
-                pp_fixes.extend(corr_pp_fixes)
-
-                # Re-audit the corrected version
-                re_audit = audit_report(
-                    report_text, corrected, client_auditor, glossary_text,
+            # Step 4b: Only correct if validation confirms real issues
+            if audit_validation["verdict"] == "correct":
+                corrected = correct_translation(
+                    report_text, translation, audit_validation["confirmed"],
+                    client_translator, glossary_text,
                     config["temperature"], config["max_retries"],
                 )
 
-                if re_audit:
-                    re_audit_data = re_audit
-                    correction_history.append({
-                        "round": 1,
-                        "score": re_audit_data.get("score", 0),
-                        "inconsistencias": re_audit_data.get("inconsistencias", []),
-                    })
+                if corrected:
+                    corrected, corr_pp_fixes = postprocess_translation(report_text, corrected)
+                    pp_fixes.extend(corr_pp_fixes)
 
-                    # Accept correction if it improved
-                    if re_audit_data.get("score", 0) >= audit_data.get("score", 0):
-                        translation = corrected
-                        audit_data = re_audit_data
+                    # Re-audit the corrected version
+                    re_audit = audit_report(
+                        report_text, corrected, client_auditor, glossary_text,
+                        config["temperature"], config["max_retries"],
+                    )
+
+                    if re_audit:
+                        correction_history.append({
+                            "round": 1,
+                            "score": re_audit.get("score", 0),
+                            "inconsistencias": re_audit.get("inconsistencias", []),
+                        })
+
+                        # Accept correction if it improved or maintained score
+                        if re_audit.get("score", 0) >= audit_data.get("score", 0):
+                            translation = corrected
+                            audit_data = re_audit
 
         # Step 5: Compute additional metrics
         similarity = compute_similarity(report_text, translation)
@@ -284,12 +295,17 @@ def run_translation(config: dict) -> None:
         # Separate raw response for auditability
         raw_response = audit_data.pop("_raw_response", "")
 
-        audit_results.append({
+        audit_entry = {
             "report_id": report_id,
             "original_text": report_text,
             "translated_text": translation,
             "audit": audit_data,
             "audit_raw_response": raw_response,
+            "audit_validation": {
+                "confirmed": audit_validation["confirmed"],
+                "rejected": audit_validation["rejected"],
+                "verdict": audit_validation["verdict"],
+            } if audit_validation else None,
             "postprocess_fixes": pp_fixes,
             "correction_history": correction_history,
             "terms_check": {
@@ -299,7 +315,8 @@ def run_translation(config: dict) -> None:
             },
             "similarity": round(similarity, 4),
             "status": status,
-        })
+        }
+        audit_results.append(audit_entry)
 
         # Save periodically
         if (len(translation_records) % config["batch_size"] == 0) or (idx == pending.index[-1]):

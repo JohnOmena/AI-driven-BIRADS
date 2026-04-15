@@ -5,6 +5,7 @@ from src.translation.validate import (
     parse_audit_response,
     classify_translation,
     postprocess_translation,
+    validate_audit_findings,
     _is_subterm_of_matched,
 )
 
@@ -108,6 +109,116 @@ def test_postprocess_no_fix_when_correct():
     fixed, fixes = postprocess_translation(original, translated)
     assert fixed == translated
     assert len(fixes) == 0
+
+
+# --- Audit validation tests (meta-auditing the DeepSeek) ---
+
+def test_validate_rejects_false_positive_laterality():
+    """Reject C4 finding when laterality is actually correct."""
+    original = "Nodulo en mama derecha."
+    translated = "Nodulo na mama direita."
+    audit = {
+        "aprovado": False,
+        "score": 8,
+        "inconsistencias": [
+            {"criterio": "C4", "problema": "lateralidade incorreta"}
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "keep"
+    assert len(result["rejected"]) == 1
+    assert len(result["confirmed"]) == 0
+
+
+def test_validate_confirms_real_laterality_issue():
+    """Confirm C4 finding when laterality is actually wrong."""
+    original = "Nodulo en mama derecha."
+    translated = "Nodulo na mama esquerda."
+    audit = {
+        "aprovado": False,
+        "score": 5,
+        "inconsistencias": [
+            {"criterio": "C4", "problema": "lateralidade invertida"}
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "correct"
+    assert len(result["confirmed"]) == 1
+
+
+def test_validate_rejects_false_positive_birads_category():
+    """Reject C2 finding when BI-RADS category is actually preserved."""
+    original = "BI-RADS 3."
+    translated = "BI-RADS 3."
+    audit = {
+        "aprovado": False,
+        "score": 8,
+        "inconsistencias": [
+            {"criterio": "C2", "problema": "categoria alterada"}
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "keep"
+    assert len(result["rejected"]) == 1
+
+
+def test_validate_confirms_real_number_issue():
+    """Confirm C3 finding when measurements are actually different."""
+    original = "Nodulo de 14 mm."
+    translated = "Nodulo de 41 mm."
+    audit = {
+        "aprovado": False,
+        "score": 5,
+        "inconsistencias": [
+            {"criterio": "C3", "problema": "medida alterada", "original": "14 mm", "traducao": "41 mm"}
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "correct"
+    assert len(result["confirmed"]) == 1
+
+
+def test_validate_rejects_false_positive_negation():
+    """Reject C6 finding when negation count matches."""
+    original = "No se observan calcificaciones. No se observan masas."
+    translated = "Nao se observam calcificacoes. Nao se observam massas."
+    audit = {
+        "aprovado": False,
+        "score": 8,
+        "inconsistencias": [
+            {"criterio": "C6", "problema": "negacao removida"}
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "keep"
+    assert len(result["rejected"]) == 1
+
+
+def test_validate_mixed_confirmed_and_rejected():
+    """Mixed findings: some confirmed, some rejected."""
+    original = "Nodulo de 14 mm en mama derecha. BI-RADS 4A."
+    translated = "Nodulo de 14 mm na mama direita. BI-RADS 4A."
+    audit = {
+        "aprovado": False,
+        "score": 7,
+        "inconsistencias": [
+            {"criterio": "C4", "problema": "lateralidade invertida"},  # FALSE: direita is correct
+            {"criterio": "C7", "problema": "referencia temporal omitida"},  # TRUSTED: C7
+        ],
+    }
+    result = validate_audit_findings(original, translated, audit, [])
+    assert result["verdict"] == "correct"  # C7 confirmed
+    assert len(result["confirmed"]) == 1
+    assert len(result["rejected"]) == 1
+    assert result["rejected"][0]["criterio"] == "C4"
+
+
+def test_validate_empty_inconsistencies():
+    """No inconsistencies = keep translation."""
+    audit = {"aprovado": True, "score": 10, "inconsistencias": []}
+    result = validate_audit_findings("", "", audit, [])
+    assert result["verdict"] == "keep"
+    assert len(result["confirmed"]) == 0
 
 
 # --- Audit response parsing tests ---
