@@ -4,6 +4,8 @@ from src.translation.validate import (
     check_birads_terms_preserved,
     parse_audit_response,
     classify_translation,
+    postprocess_translation,
+    _is_subterm_of_matched,
 )
 
 
@@ -38,6 +40,74 @@ def test_birads_terms_no_terms_in_original():
     result = check_birads_terms_preserved(original, translated, pairs)
     assert result["match_ratio"] == 1.0
     assert result["total_expected"] == 0
+
+
+def test_birads_terms_subterm_not_counted():
+    """Subterm 'areola' should not be counted separately when 'retroareolar' is present."""
+    pairs = [("retroareolar", "retroareolar"), ("areola", "aréola")]
+    original = "Imagen en region retroareolar de mama derecha."
+    translated = "Imagem na regiao retroareolar da mama direita."
+    result = check_birads_terms_preserved(original, translated, pairs)
+    assert result["match_ratio"] == 1.0
+    assert result["total_expected"] == 1  # Only retroareolar, not areola
+
+
+def test_is_subterm_of_matched():
+    """Subterm detection works correctly."""
+    terms = ["retroareolar", "areola", "mama derecha"]
+    assert _is_subterm_of_matched("areola", terms) is True
+    assert _is_subterm_of_matched("retroareolar", terms) is False
+    assert _is_subterm_of_matched("mama derecha", terms) is False
+
+
+# --- Post-processing tests ---
+
+def test_postprocess_fixes_gender_agreement():
+    """Fix 'margens obscurecidos' -> 'margens obscurecidas'."""
+    original = "Imagen nodular de margenes oscurecidos."
+    translated = "Imagem nodular de margens obscurecidos."
+    fixed, fixes = postprocess_translation(original, translated)
+    assert "obscurecidas" in fixed
+    assert "obscurecidos" not in fixed
+    assert len(fixes) == 1
+    assert fixes[0]["tipo"] == "C1_concordancia_genero"
+
+
+def test_postprocess_fixes_spanish_verb():
+    """Fix Spanish verb 'observan' -> Portuguese 'observam'."""
+    original = "No se observan calcificaciones sospechosas."
+    translated = "Nao se observan calcificacoes suspeitas."
+    fixed, fixes = postprocess_translation(original, translated)
+    assert "observam" in fixed
+    assert any(f["tipo"] == "C6_verbo_espanhol" for f in fixes)
+
+
+def test_postprocess_fixes_caracteres():
+    """Fix 'caracteristicas' -> 'caracteres' when original uses 'caracteres'."""
+    original = "Imagenes nodulares con caracteres ganglionares."
+    translated = "Imagens nodulares com caracter\u00edsticas ganglionares."
+    fixed, fixes = postprocess_translation(original, translated)
+    assert "caracteres" in fixed
+    assert "caracter\u00edsticas" not in fixed
+    assert any(f["tipo"] == "C1_fidelidade_lexical" for f in fixes)
+
+
+def test_postprocess_preserves_formatting():
+    """Restore '.-' line endings from original."""
+    original = "Linea uno.-\nLinea dos.-"
+    translated = "Linha um.\nLinha dois."
+    fixed, fixes = postprocess_translation(original, translated)
+    assert fixed == "Linha um.-\nLinha dois.-"
+    assert any(f["tipo"] == "C5_formatacao" for f in fixes)
+
+
+def test_postprocess_no_fix_when_correct():
+    """No fixes applied when translation is already correct."""
+    original = "Imagenes nodulares con caracteres ganglionares."
+    translated = "Imagens nodulares com caracteres ganglionares."
+    fixed, fixes = postprocess_translation(original, translated)
+    assert fixed == translated
+    assert len(fixes) == 0
 
 
 # --- Audit response parsing tests ---
@@ -79,17 +149,38 @@ def test_parse_audit_response_invalid():
 
 # --- Classification tests ---
 
-def test_classify_approved():
-    """High audit + high similarity + good terms = approved."""
+def test_classify_approved_auditor_approved():
+    """Auditor approved + good similarity + good terms = approved (path 1)."""
     audit = {"aprovado": True, "score": 9}
-    result = classify_translation(audit, similarity=0.95, term_match_ratio=1.0)
+    result = classify_translation(audit, similarity=0.90, term_match_ratio=1.0)
+    assert result == "approved"
+
+
+def test_classify_approved_cross_language_similarity():
+    """Auditor approved with cross-language similarity >= 0.85 = approved."""
+    audit = {"aprovado": True, "score": 10}
+    result = classify_translation(audit, similarity=0.86, term_match_ratio=1.0)
+    assert result == "approved"
+
+
+def test_classify_approved_high_score_override():
+    """Score >= 8 + strong metrics overrides strict auditor (path 2)."""
+    audit = {"aprovado": False, "score": 8}
+    result = classify_translation(audit, similarity=0.93, term_match_ratio=1.0)
     assert result == "approved"
 
 
 def test_classify_review():
-    """Medium audit score but decent similarity = review."""
+    """Score 7 + decent similarity = review."""
     audit = {"aprovado": False, "score": 7}
-    result = classify_translation(audit, similarity=0.90, term_match_ratio=0.9)
+    result = classify_translation(audit, similarity=0.85, term_match_ratio=0.9)
+    assert result == "review"
+
+
+def test_classify_review_low_terms():
+    """Score 8 but low term match = review (not approved via path 2)."""
+    audit = {"aprovado": False, "score": 8}
+    result = classify_translation(audit, similarity=0.90, term_match_ratio=0.85)
     assert result == "review"
 
 

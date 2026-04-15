@@ -28,6 +28,7 @@ from src.translation.validate import (
     check_birads_terms_preserved,
     parse_audit_response,
     classify_translation,
+    postprocess_translation,
 )
 
 
@@ -180,17 +181,20 @@ def run_translation(config: dict) -> None:
             })
             continue
 
-        # Step 2: Audit with DeepSeek
+        # Step 2: Post-process translation (fix known Gemini patterns)
+        translation, pp_fixes = postprocess_translation(report_text, translation)
+
+        # Step 3: Audit with DeepSeek
         audit = audit_report(
             report_text, translation, client_auditor, glossary_text,
             config["temperature"], config["max_retries"],
         )
 
-        # Step 3: Compute additional metrics
+        # Step 4: Compute additional metrics
         similarity = compute_similarity(report_text, translation)
         terms_check = check_birads_terms_preserved(report_text, translation, glossary_pairs)
 
-        # Step 4: Classify
+        # Step 5: Classify
         audit_data = audit or {"aprovado": False, "score": 0, "inconsistencias": [{"criterio": "audit_failed", "problema": "Auditor did not respond"}]}
         status = classify_translation(audit_data, similarity, terms_check["match_ratio"])
 
@@ -214,6 +218,7 @@ def run_translation(config: dict) -> None:
             "translated_text": translation,
             "audit": audit_data,
             "audit_raw_response": raw_response,
+            "postprocess_fixes": pp_fixes,
             "terms_check": {
                 "match_ratio": round(terms_check["match_ratio"], 4),
                 "missing_terms": terms_check["missing_terms"],

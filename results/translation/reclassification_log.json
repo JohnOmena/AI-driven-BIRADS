@@ -1,0 +1,552 @@
+[
+  {
+    "report_id": "RPT_000003",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.8974
+  },
+  {
+    "report_id": "RPT_000004",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8595
+  },
+  {
+    "report_id": "RPT_000005",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9286,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9282
+  },
+  {
+    "report_id": "RPT_000006",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9527
+  },
+  {
+    "report_id": "RPT_000007",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9333,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.899
+  },
+  {
+    "report_id": "RPT_000012",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9814
+  },
+  {
+    "report_id": "RPT_000015",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9091,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9327
+  },
+  {
+    "report_id": "RPT_000018",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9231,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9357
+  },
+  {
+    "report_id": "RPT_000024",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9471
+  },
+  {
+    "report_id": "RPT_000030",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9465
+  },
+  {
+    "report_id": "RPT_000032",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.8462,
+    "new_term_ratio": 0.9167,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9768
+  },
+  {
+    "report_id": "RPT_000033",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9507
+  },
+  {
+    "report_id": "RPT_000034",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.895
+  },
+  {
+    "report_id": "RPT_000035",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9091,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9163
+  },
+  {
+    "report_id": "RPT_000036",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9347
+  },
+  {
+    "report_id": "RPT_000037",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9685
+  },
+  {
+    "report_id": "RPT_000039",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.937
+  },
+  {
+    "report_id": "RPT_000040",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.8889,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8991
+  },
+  {
+    "report_id": "RPT_000042",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8639
+  },
+  {
+    "report_id": "RPT_000044",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9444,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.94
+  },
+  {
+    "report_id": "RPT_000048",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9065
+  },
+  {
+    "report_id": "RPT_000049",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9412,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9209
+  },
+  {
+    "report_id": "RPT_000052",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9319
+  },
+  {
+    "report_id": "RPT_000053",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9231,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9412
+  },
+  {
+    "report_id": "RPT_000055",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9286,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9207
+  },
+  {
+    "report_id": "RPT_000061",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8756
+  },
+  {
+    "report_id": "RPT_000064",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9091,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9182
+  },
+  {
+    "report_id": "RPT_000066",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9277
+  },
+  {
+    "report_id": "RPT_000067",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.8889,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.924
+  },
+  {
+    "report_id": "RPT_000068",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 9,
+    "approved": false,
+    "similarity": 0.9465
+  },
+  {
+    "report_id": "RPT_000069",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9277
+  },
+  {
+    "report_id": "RPT_000073",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9091,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9228
+  },
+  {
+    "report_id": "RPT_000074",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8892
+  },
+  {
+    "report_id": "RPT_000083",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9493
+  },
+  {
+    "report_id": "RPT_000086",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9766
+  },
+  {
+    "report_id": "RPT_000087",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9167,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9191
+  },
+  {
+    "report_id": "RPT_000088",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9551
+  },
+  {
+    "report_id": "RPT_000089",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9091,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9327
+  },
+  {
+    "report_id": "RPT_000091",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.9,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9091
+  },
+  {
+    "report_id": "RPT_000092",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8755
+  },
+  {
+    "report_id": "RPT_000095",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9684
+  },
+  {
+    "report_id": "RPT_000096",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9072
+  },
+  {
+    "report_id": "RPT_000098",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9424
+  },
+  {
+    "report_id": "RPT_000100",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9837
+  },
+  {
+    "report_id": "RPT_000101",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9852
+  },
+  {
+    "report_id": "RPT_000102",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9178
+  },
+  {
+    "report_id": "RPT_000103",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9465
+  },
+  {
+    "report_id": "RPT_000104",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.8889,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9063
+  },
+  {
+    "report_id": "RPT_000109",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.8889,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9282
+  },
+  {
+    "report_id": "RPT_000110",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.8961
+  },
+  {
+    "report_id": "RPT_000111",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9422
+  },
+  {
+    "report_id": "RPT_000113",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 0.9231,
+    "new_term_ratio": 1.0,
+    "score": 9,
+    "approved": false,
+    "similarity": 0.8988
+  },
+  {
+    "report_id": "RPT_000115",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.8781
+  },
+  {
+    "report_id": "RPT_000116",
+    "old_status": "approved",
+    "new_status": "approved",
+    "old_term_ratio": 0.8889,
+    "new_term_ratio": 1.0,
+    "score": 10,
+    "approved": true,
+    "similarity": 0.9063
+  },
+  {
+    "report_id": "RPT_000117",
+    "old_status": "review",
+    "new_status": "approved",
+    "old_term_ratio": 1.0,
+    "new_term_ratio": 1.0,
+    "score": 8,
+    "approved": false,
+    "similarity": 0.9263
+  }
+]

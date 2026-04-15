@@ -1,0 +1,735 @@
+[
+  {
+    "report_id": "RPT_000003",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS"
+  },
+  {
+    "report_id": "RPT_000005",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS "
+  },
+  {
+    "report_id": "RPT_000007",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000010",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS "
+  },
+  {
+    "report_id": "RPT_000014",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO MUITO DENSAS, O QUE DIMINUI A SENSIBILIDADE MAMOGRÁFICA E COM PADRÃO ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO MUITO DENSAS, O QUE DIMINUI A SENSIBILIDADE MAMOGRÁFICA E COM PADRÃO "
+  },
+  {
+    "report_id": "RPT_000020",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMA",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMA"
+  },
+  {
+    "report_id": "RPT_000022",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000030",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000035",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS TI",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS TI"
+  },
+  {
+    "report_id": "RPT_000036",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000037",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS PEQUENOS (MAMAS TIPO C).-\nNO CSE, PLANO MÉDIO DA MA",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS PEQUENOS (MAMAS TIPO C).-\nNO CSE, PLANO MÉDIO DA MA"
+  },
+  {
+    "report_id": "RPT_000039",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000043",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000044",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000048",
+    "correcoes": [
+      {
+        "tipo": "C6_verbo_espanhol",
+        "de": "observan",
+        "para": "observam",
+        "justificativa": "Conjugacao verbal em espanhol mantida - corrigido para portugues"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAN ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS ESTÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE observam ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS ESTÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS"
+  },
+  {
+    "report_id": "RPT_000050",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000054",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS ESTÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (TIPO A).-\nEM",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS ESTÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (TIPO A).-\nEM"
+  },
+  {
+    "report_id": "RPT_000056",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).-",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).-"
+  },
+  {
+    "report_id": "RPT_000057",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000059",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000072",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000074",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS TI",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS TI"
+  },
+  {
+    "report_id": "RPT_000075",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULO",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULO"
+  },
+  {
+    "report_id": "RPT_000076",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR SETORES DISPERSOS DE DENSIDADE FIBROGLANDULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000077",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS E COM PADRÃO MICRONODULAR (MAMAS T",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS E COM PADRÃO MICRONODULAR (MAMAS T"
+  },
+  {
+    "report_id": "RPT_000087",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS APRESENTAM DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).\nNA INCID",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS APRESENTAM DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).\nNA INCID"
+  },
+  {
+    "report_id": "RPT_000088",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULO",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULO"
+  },
+  {
+    "report_id": "RPT_000092",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).-",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).-"
+  },
+  {
+    "report_id": "RPT_000095",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULOS PEQUENOS (MAMAS TIPO C).\nEM AMBAS AS MAMAS IMPRESS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIAM OCULTAR ALGUNS NÓDULOS PEQUENOS (MAMAS TIPO C).\nEM AMBAS AS MAMAS IMPRESS"
+  },
+  {
+    "report_id": "RPT_000096",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).\nN",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (MAMAS TIPO B).\nN"
+  },
+  {
+    "report_id": "RPT_000098",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO MUITO DENSAS, O QUE DIMINUI A SENSIBILIDADE MAMOGRÁFICA (MAMAS TIPO D",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO MUITO DENSAS, O QUE DIMINUI A SENSIBILIDADE MAMOGRÁFICA (MAMAS TIPO D"
+  },
+  {
+    "report_id": "RPT_000100",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS E INCIDÊNCIAS DE EKLUND\nMamas com prótese de localização retroglandular.\nAs mamas se apresentam heterogeneamente densas que poderia o",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS E INCIDÊNCIAS DE EKLUND\nMamas com prótese de localização retroglandular.\nAs mamas se apresentam heterogeneamente densas que poderia o"
+  },
+  {
+    "report_id": "RPT_000106",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNO C",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SÃO OBSERVADAS ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNO C"
+  },
+  {
+    "report_id": "RPT_000110",
+    "correcoes": [
+      {
+        "tipo": "C1_concordancia_genero",
+        "de": "margens obscurecidos",
+        "para": "margens obscurecidas",
+        "justificativa": "Concordancia de genero: margens (feminino) exige obscurecidas (feminino)"
+      },
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNA INCI",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNA INCI"
+  },
+  {
+    "report_id": "RPT_000114",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS ESTÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (MAMAS TIPO A)",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS ESTÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (MAMAS TIPO A)"
+  },
+  {
+    "report_id": "RPT_000117",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO SE ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO SE "
+  },
+  {
+    "report_id": "RPT_000121",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS ESTÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO S",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS ESTÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO S"
+  },
+  {
+    "report_id": "RPT_000124",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO SE ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES DISPERSAS (TIPO B).\nNÃO SE "
+  },
+  {
+    "report_id": "RPT_000127",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (MAMAS TIPO A).\n",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.\nAS MAMAS SÃO COMPOSTAS POR TECIDO ADIPOSO QUASE EM SUA TOTALIDADE (MAMAS TIPO A).\n"
+  },
+  {
+    "report_id": "RPT_000132",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS. IMPRESSIONA MAMILO UMBILICADO BILATERAL.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES ",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS. IMPRESSIONA MAMILO UMBILICADO BILATERAL.\nAS MAMAS SÃO COMPOSTAS POR DENSIDADES FIBROGLANDULARES "
+  },
+  {
+    "report_id": "RPT_000135",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS PEQUENOS (MAM",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS PEQUENOS (MAM"
+  },
+  {
+    "report_id": "RPT_000136",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000139",
+    "correcoes": [
+      {
+        "tipo": "C1_fidelidade_lexical",
+        "de": "caracteristicas",
+        "para": "caracteres",
+        "justificativa": "Preservar termo medico original: caracteres (nao traduzir livremente para caracteristicas)"
+      }
+    ],
+    "texto_anterior": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS",
+    "texto_corrigido": "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS\nNÃO SE OBSERVAM ALTERAÇÕES CUTÂNEAS NEM DO MAMILO.-\nAS MAMAS SE APRESENTAM HETEROGENEAMENTE DENSAS QUE PODERIA OCULTAR ALGUNS NÓDULOS"
+  },
+  {
+    "report_id": "RPT_000003",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 4
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000005",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 7
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000010",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 5
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000017",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 3
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000021",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 3
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000033",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 4
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000034",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 4
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000035",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 5
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000045",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 3
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000047",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 1
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000061",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 3
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000069",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 5
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000095",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 4
+      }
+    ]
+  },
+  {
+    "report_id": "RPT_000101",
+    "correcoes": [
+      {
+        "tipo": "C5_formatacao",
+        "de": "Linhas terminando em \".\" (original termina em \".-\")",
+        "para": "Restaurado \".-\" no final das linhas",
+        "justificativa": "Preservar pontuacao original do laudo (regra 8: estrutura e pontuacao)",
+        "linhas_corrigidas": 1
+      }
+    ]
+  }
+]
