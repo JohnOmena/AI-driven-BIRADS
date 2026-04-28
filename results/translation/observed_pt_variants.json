@@ -1,0 +1,689 @@
+{
+  "mama derecha": {
+    "pt_canonical_old": "mama direita",
+    "category": "anatomy",
+    "observed_variants": [
+      "mama direita"
+    ]
+  },
+  "mama izquierda": {
+    "pt_canonical_old": "mama esquerda",
+    "category": "anatomy",
+    "observed_variants": [
+      "mama esquerda"
+    ]
+  },
+  "cuadrante superior externo": {
+    "pt_canonical_old": "quadrante superior externo",
+    "category": "anatomy",
+    "observed_variants": [
+      "quadrante superior externo"
+    ]
+  },
+  "cuadrante superior interno": {
+    "pt_canonical_old": "quadrante superior interno",
+    "category": "anatomy",
+    "observed_variants": []
+  },
+  "cuadrante inferior externo": {
+    "pt_canonical_old": "quadrante inferior externo",
+    "category": "anatomy",
+    "observed_variants": []
+  },
+  "cuadrante inferior interno": {
+    "pt_canonical_old": "quadrante inferior interno",
+    "category": "anatomy",
+    "observed_variants": [
+      "quadrante inferior interno"
+    ]
+  },
+  "retroareolar": {
+    "pt_canonical_old": "retroareolar",
+    "category": "anatomy",
+    "observed_variants": [
+      "retroareolar"
+    ]
+  },
+  "prolongación axilar": {
+    "pt_canonical_old": "prolongamento axilar",
+    "category": "anatomy",
+    "observed_variants": []
+  },
+  "región axilar": {
+    "pt_canonical_old": "região axilar",
+    "category": "anatomy",
+    "observed_variants": [
+      "região axilar"
+    ]
+  },
+  "pezón": {
+    "pt_canonical_old": "mamilo",
+    "category": "anatomy",
+    "observed_variants": [
+      "mamilo",
+      "mamilos"
+    ]
+  },
+  "mamelón": {
+    "pt_canonical_old": "mamilo",
+    "category": "anatomy",
+    "observed_variants": [
+      "mamilo",
+      "mamilos"
+    ]
+  },
+  "areola": {
+    "pt_canonical_old": "aréola",
+    "category": "anatomy",
+    "observed_variants": [
+      "aréola"
+    ]
+  },
+  "conducto": {
+    "pt_canonical_old": "ducto",
+    "category": "anatomy",
+    "observed_variants": []
+  },
+  "piel": {
+    "pt_canonical_old": "pele",
+    "category": "anatomy",
+    "observed_variants": []
+  },
+  "tejido glandular": {
+    "pt_canonical_old": "tecido glandular",
+    "category": "anatomy",
+    "observed_variants": [
+      "tecido glandular"
+    ]
+  },
+  "tejido adiposo": {
+    "pt_canonical_old": "tecido adiposo",
+    "category": "anatomy",
+    "observed_variants": [
+      "tecido adiposo"
+    ]
+  },
+  "plano posterior": {
+    "pt_canonical_old": "plano posterior",
+    "category": "anatomy",
+    "observed_variants": [
+      "plano posterior"
+    ]
+  },
+  "región pectoaxilar": {
+    "pt_canonical_old": "região pectoaxilar",
+    "category": "anatomy",
+    "observed_variants": [
+      "região pectoaxilar"
+    ]
+  },
+  "nódulo": {
+    "pt_canonical_old": "nódulo",
+    "category": "findings_mass",
+    "observed_variants": [
+      "nódulo",
+      "nódulos"
+    ]
+  },
+  "masa": {
+    "pt_canonical_old": "massa",
+    "category": "findings_mass",
+    "observed_variants": [
+      "massa"
+    ]
+  },
+  "imagen nodular": {
+    "pt_canonical_old": "imagem nodular",
+    "category": "findings_mass",
+    "observed_variants": [
+      "imagem nodular"
+    ]
+  },
+  "formación nodular": {
+    "pt_canonical_old": "formação nodular",
+    "category": "findings_mass",
+    "observed_variants": [
+      "formação nodular"
+    ]
+  },
+  "lesión nodular": {
+    "pt_canonical_old": "lesão nodular",
+    "category": "findings_mass",
+    "observed_variants": []
+  },
+  "asimetría": {
+    "pt_canonical_old": "assimetria",
+    "category": "findings_mass",
+    "observed_variants": [
+      "assimetria",
+      "assimetrias"
+    ]
+  },
+  "asimetría focal": {
+    "pt_canonical_old": "assimetria focal",
+    "category": "findings_mass",
+    "observed_variants": [
+      "assimetria focal"
+    ]
+  },
+  "asimetría global": {
+    "pt_canonical_old": "assimetria global",
+    "category": "findings_mass",
+    "observed_variants": [
+      "assimetria global"
+    ]
+  },
+  "distorsión arquitectural": {
+    "pt_canonical_old": "distorção arquitetural",
+    "category": "findings_mass",
+    "observed_variants": [
+      "distorção arquitetural"
+    ]
+  },
+  "densidad asimétrica": {
+    "pt_canonical_old": "densidade assimétrica",
+    "category": "findings_mass",
+    "observed_variants": [
+      "densidade assimétrica"
+    ]
+  },
+  "calcificación": {
+    "pt_canonical_old": "calcificação",
+    "category": "findings_calcification",
+    "observed_variants": [
+      "calcificação",
+      "calcificações"
+    ]
+  },
+  "calcificaciones": {
+    "pt_canonical_old": "calcificações",
+    "category": "findings_calcification",
+    "observed_variants": [
+      "calcificação",
+      "calcificações"
+    ]
+  },
+  "microcalcificación": {
+    "pt_canonical_old": "microcalcificação",
+    "category": "findings_calcification",
+    "observed_variants": [
+      "microcalcificações"
+    ]
+  },
+  "microcalcificaciones": {
+    "pt_canonical_old": "microcalcificações",
+    "category": "findings_calcification",
+    "observed_variants": [
+      "microcalcificações"
+    ]
+  },
+  "macrocalcificación": {
+    "pt_canonical_old": "macrocalcificação",
+    "category": "findings_calcification",
+    "observed_variants": [
+      "macrocalcificação",
+      "macrocalcificações"
+    ]
+  },
+  "espiculado": {
+    "pt_canonical_old": "espiculado",
+    "category": "morphology",
+    "observed_variants": [
+      "espiculada",
+      "espiculadas",
+      "espiculados"
+    ]
+  },
+  "espiculada": {
+    "pt_canonical_old": "espiculada",
+    "category": "morphology",
+    "observed_variants": [
+      "espiculada",
+      "espiculadas",
+      "espiculados"
+    ]
+  },
+  "circunscrito": {
+    "pt_canonical_old": "circunscrito",
+    "category": "morphology",
+    "observed_variants": [
+      "circunscrita",
+      "circunscritas",
+      "circunscrito"
+    ]
+  },
+  "circunscrita": {
+    "pt_canonical_old": "circunscrita",
+    "category": "morphology",
+    "observed_variants": [
+      "circunscrita",
+      "circunscritas",
+      "circunscrito"
+    ]
+  },
+  "irregular": {
+    "pt_canonical_old": "irregular",
+    "category": "morphology",
+    "observed_variants": [
+      "irregular"
+    ]
+  },
+  "ovalado": {
+    "pt_canonical_old": "ovalado",
+    "category": "morphology",
+    "observed_variants": [
+      "ovalada",
+      "ovaladas",
+      "ovalados"
+    ]
+  },
+  "ovalada": {
+    "pt_canonical_old": "ovalada",
+    "category": "morphology",
+    "observed_variants": [
+      "ovalada",
+      "ovaladas",
+      "ovalados"
+    ]
+  },
+  "redondo": {
+    "pt_canonical_old": "redondo",
+    "category": "morphology",
+    "observed_variants": [
+      "redonda",
+      "redondas"
+    ]
+  },
+  "redonda": {
+    "pt_canonical_old": "redonda",
+    "category": "morphology",
+    "observed_variants": [
+      "redonda",
+      "redondas"
+    ]
+  },
+  "lobulado": {
+    "pt_canonical_old": "lobulado",
+    "category": "morphology",
+    "observed_variants": []
+  },
+  "lobulada": {
+    "pt_canonical_old": "lobulada",
+    "category": "morphology",
+    "observed_variants": []
+  },
+  "microlobulado": {
+    "pt_canonical_old": "microlobulado",
+    "category": "morphology",
+    "observed_variants": [
+      "microlobulada"
+    ]
+  },
+  "obscurecido": {
+    "pt_canonical_old": "obscurecido",
+    "category": "morphology",
+    "observed_variants": [
+      "obscurecida",
+      "obscurecidas",
+      "obscurecido"
+    ]
+  },
+  "indistinto": {
+    "pt_canonical_old": "indistinto",
+    "category": "morphology",
+    "observed_variants": [
+      "indistinta",
+      "indistintas"
+    ]
+  },
+  "isodenso": {
+    "pt_canonical_old": "isodenso",
+    "category": "morphology",
+    "observed_variants": [
+      "isodensa",
+      "isodensas",
+      "isodensos"
+    ]
+  },
+  "isodensos": {
+    "pt_canonical_old": "isodensos",
+    "category": "morphology",
+    "observed_variants": [
+      "isodensos"
+    ]
+  },
+  "hipodenso": {
+    "pt_canonical_old": "hipodenso",
+    "category": "morphology",
+    "observed_variants": [
+      "hipodensa"
+    ]
+  },
+  "hiperdenso": {
+    "pt_canonical_old": "hiperdenso",
+    "category": "morphology",
+    "observed_variants": [
+      "hiperdensa",
+      "hiperdensas"
+    ]
+  },
+  "heterogéneo": {
+    "pt_canonical_old": "heterogêneo",
+    "category": "morphology",
+    "observed_variants": [
+      "heterogênea",
+      "heterogêneas",
+      "heterogêneo"
+    ]
+  },
+  "homogéneo": {
+    "pt_canonical_old": "homogêneo",
+    "category": "morphology",
+    "observed_variants": []
+  },
+  "pleomórfico": {
+    "pt_canonical_old": "pleomórfico",
+    "category": "morphology",
+    "observed_variants": [
+      "pleomórfico"
+    ]
+  },
+  "amorfo": {
+    "pt_canonical_old": "amorfo",
+    "category": "morphology",
+    "observed_variants": [
+      "amorfas"
+    ]
+  },
+  "puntiforme": {
+    "pt_canonical_old": "puntiforme",
+    "category": "morphology",
+    "observed_variants": [
+      "puntiformes"
+    ]
+  },
+  "lineal fino": {
+    "pt_canonical_old": "linear fino",
+    "category": "morphology",
+    "observed_variants": []
+  },
+  "ramificado": {
+    "pt_canonical_old": "ramificado",
+    "category": "morphology",
+    "observed_variants": [
+      "ramificadas"
+    ]
+  },
+  "agrupada": {
+    "pt_canonical_old": "agrupada",
+    "category": "distribution",
+    "observed_variants": [
+      "agrupada",
+      "agrupadas"
+    ]
+  },
+  "segmentaria": {
+    "pt_canonical_old": "segmentar",
+    "category": "distribution",
+    "observed_variants": [
+      "segmentar"
+    ]
+  },
+  "lineal": {
+    "pt_canonical_old": "linear",
+    "category": "distribution",
+    "observed_variants": [
+      "linear"
+    ]
+  },
+  "regional": {
+    "pt_canonical_old": "regional",
+    "category": "distribution",
+    "observed_variants": [
+      "regional"
+    ]
+  },
+  "difusa": {
+    "pt_canonical_old": "difusa",
+    "category": "distribution",
+    "observed_variants": [
+      "difusas",
+      "difuso"
+    ]
+  },
+  "ductal": {
+    "pt_canonical_old": "ductal",
+    "category": "distribution",
+    "observed_variants": [
+      "ductal"
+    ]
+  },
+  "composición mamaria": {
+    "pt_canonical_old": "composição mamária",
+    "category": "density",
+    "observed_variants": [
+      "composição mamária"
+    ]
+  },
+  "predominantemente adiposa": {
+    "pt_canonical_old": "predominantemente adiposa",
+    "category": "density",
+    "observed_variants": []
+  },
+  "densidades fibroglandulares dispersas": {
+    "pt_canonical_old": "densidades fibroglandulares dispersas",
+    "category": "density",
+    "observed_variants": [
+      "densidades fibroglandulares dispersas"
+    ]
+  },
+  "heterogéneamente densa": {
+    "pt_canonical_old": "heterogeneamente densa",
+    "category": "density",
+    "observed_variants": [
+      "heterogeneamente densa",
+      "heterogeneamente densas",
+      "heterogeneamente denso"
+    ]
+  },
+  "extremadamente densa": {
+    "pt_canonical_old": "extremamente densa",
+    "category": "density",
+    "observed_variants": [
+      "extremamente densas"
+    ]
+  },
+  "tipo A": {
+    "pt_canonical_old": "tipo A",
+    "category": "density",
+    "observed_variants": [
+      "tipo a"
+    ]
+  },
+  "tipo B": {
+    "pt_canonical_old": "tipo B",
+    "category": "density",
+    "observed_variants": [
+      "tipo b"
+    ]
+  },
+  "tipo C": {
+    "pt_canonical_old": "tipo C",
+    "category": "density",
+    "observed_variants": [
+      "tipo c"
+    ]
+  },
+  "tipo D": {
+    "pt_canonical_old": "tipo D",
+    "category": "density",
+    "observed_variants": [
+      "tipo d"
+    ]
+  },
+  "BI-RADS": {
+    "pt_canonical_old": "BI-RADS",
+    "category": "assessment",
+    "observed_variants": [
+      "bi-rads"
+    ]
+  },
+  "benigno": {
+    "pt_canonical_old": "benigno",
+    "category": "assessment",
+    "observed_variants": [
+      "benigno",
+      "benignos"
+    ]
+  },
+  "benigna": {
+    "pt_canonical_old": "benigna",
+    "category": "assessment",
+    "observed_variants": [
+      "benigno",
+      "benignos"
+    ]
+  },
+  "maligno": {
+    "pt_canonical_old": "maligno",
+    "category": "assessment",
+    "observed_variants": [
+      "maligno"
+    ]
+  },
+  "maligna": {
+    "pt_canonical_old": "maligna",
+    "category": "assessment",
+    "observed_variants": [
+      "maligno"
+    ]
+  },
+  "sospechoso": {
+    "pt_canonical_old": "suspeito",
+    "category": "assessment",
+    "observed_variants": [
+      "suspeitas",
+      "suspeito"
+    ]
+  },
+  "sospechosa": {
+    "pt_canonical_old": "suspeita",
+    "category": "assessment",
+    "observed_variants": [
+      "suspeitas",
+      "suspeito"
+    ]
+  },
+  "probablemente benigno": {
+    "pt_canonical_old": "provavelmente benigno",
+    "category": "assessment",
+    "observed_variants": []
+  },
+  "hallazgo": {
+    "pt_canonical_old": "achado",
+    "category": "assessment",
+    "observed_variants": [
+      "achado",
+      "achados"
+    ]
+  },
+  "hallazgos": {
+    "pt_canonical_old": "achados",
+    "category": "assessment",
+    "observed_variants": [
+      "achados"
+    ]
+  },
+  "mamografía": {
+    "pt_canonical_old": "mamografia",
+    "category": "procedure",
+    "observed_variants": [
+      "mamografia",
+      "mamografias"
+    ]
+  },
+  "ecografía": {
+    "pt_canonical_old": "ecografia",
+    "category": "procedure",
+    "observed_variants": [
+      "ecografia",
+      "ecografias"
+    ]
+  },
+  "ultrasonido": {
+    "pt_canonical_old": "ultrassonografia",
+    "category": "procedure",
+    "observed_variants": [
+      "ultrassonografia",
+      "ultrassonografias"
+    ]
+  },
+  "biopsia": {
+    "pt_canonical_old": "biópsia",
+    "category": "procedure",
+    "observed_variants": [
+      "biópsia"
+    ]
+  },
+  "incidencia": {
+    "pt_canonical_old": "incidência",
+    "category": "procedure",
+    "observed_variants": [
+      "incidência",
+      "incidências"
+    ]
+  },
+  "cráneo-caudal": {
+    "pt_canonical_old": "craniocaudal",
+    "category": "procedure",
+    "observed_variants": [
+      "craniocaudal"
+    ]
+  },
+  "medio lateral oblicua": {
+    "pt_canonical_old": "médio-lateral oblíqua",
+    "category": "procedure",
+    "observed_variants": [
+      "médio-lateral oblíqua",
+      "médio-lateral oblíquas"
+    ]
+  },
+  "prótesis": {
+    "pt_canonical_old": "prótese",
+    "category": "procedure",
+    "observed_variants": [
+      "prótese",
+      "próteses"
+    ]
+  },
+  "implante": {
+    "pt_canonical_old": "implante",
+    "category": "procedure",
+    "observed_variants": [
+      "implante",
+      "implantes"
+    ]
+  },
+  "ganglio linfático": {
+    "pt_canonical_old": "linfonodo",
+    "category": "procedure",
+    "observed_variants": [
+      "linfonodo",
+      "linfonodos"
+    ]
+  },
+  "ganglios linfáticos": {
+    "pt_canonical_old": "linfonodos",
+    "category": "procedure",
+    "observed_variants": [
+      "linfonodos"
+    ]
+  },
+  "ganglio linfático intramamario": {
+    "pt_canonical_old": "linfonodo intramamário",
+    "category": "procedure",
+    "observed_variants": [
+      "linfonodo intramamário"
+    ]
+  }
+}
