@@ -1,0 +1,110 @@
+{
+  "metadata": {
+    "computed_at": "2026-04-28",
+    "source": "results/translation/audit_results.json (517 laudos da última sessão)",
+    "limitation": "Não temos correction_history para os ~3.840 laudos das sessões anteriores (audit_results.json foi sobrescrito a cada restart). Métrica é estimada na sample disponível.",
+    "method": "verdict=correct em round 0 da meta-auditoria → correção aplicada. Cruzar critério (C1) da inconsistência."
+  },
+  "totals": {
+    "sample_size": 517,
+    "n_corrected": 89,
+    "n_with_c1_involved": 7,
+    "n_only_c1": 3,
+    "c1_involvement_pct": 7.87,
+    "c1_only_pct": 3.37
+  },
+  "decision": "PROCEED_NORMALLY",
+  "justification": "C1 envolvido em 7.9% das correções (< 20%) - prosseguir T13 sem alteração. IDs afetados ficam documentados como subset de baixo risco.",
+  "risk_subset_ids": [
+    "RPT_003844",
+    "RPT_003858",
+    "RPT_003869",
+    "RPT_004022",
+    "RPT_004164",
+    "RPT_004280",
+    "RPT_004289"
+  ],
+  "corrected_records_with_c1": [
+    {
+      "report_id": "RPT_003844",
+      "criteria": [
+        "C1"
+      ],
+      "has_C1": true,
+      "only_C1": true,
+      "n_inconsistencias": 1,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    },
+    {
+      "report_id": "RPT_003858",
+      "criteria": [
+        "C1",
+        "C7"
+      ],
+      "has_C1": true,
+      "only_C1": false,
+      "n_inconsistencias": 3,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    },
+    {
+      "report_id": "RPT_003869",
+      "criteria": [
+        "C1"
+      ],
+      "has_C1": true,
+      "only_C1": true,
+      "n_inconsistencias": 1,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    },
+    {
+      "report_id": "RPT_004022",
+      "criteria": [
+        "C1"
+      ],
+      "has_C1": true,
+      "only_C1": true,
+      "n_inconsistencias": 1,
+      "audit_score_round0": 9,
+      "audit_score_round1": 10
+    },
+    {
+      "report_id": "RPT_004164",
+      "criteria": [
+        "C1",
+        "C5"
+      ],
+      "has_C1": true,
+      "only_C1": false,
+      "n_inconsistencias": 2,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    },
+    {
+      "report_id": "RPT_004280",
+      "criteria": [
+        "C1",
+        "C4"
+      ],
+      "has_C1": true,
+      "only_C1": false,
+      "n_inconsistencias": 2,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    },
+    {
+      "report_id": "RPT_004289",
+      "criteria": [
+        "C1",
+        "C5"
+      ],
+      "has_C1": true,
+      "only_C1": false,
+      "n_inconsistencias": 2,
+      "audit_score_round0": 8,
+      "audit_score_round1": 8
+    }
+  ]
+}
