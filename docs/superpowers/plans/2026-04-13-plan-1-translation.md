@@ -2167,7 +2167,19 @@ git commit -m "feat(evaluation): bootstrap eval module + Atlas BI-RADS glossario
 
 ---
 
-### Task 12.5: Fix prompt do auditor C1 (derivação programática do glossário Atlas) 🔲 PENDING  ⚠ pré-requisito de T13
+### Task 12.5: Fix prompt do auditor C1 (derivação programática do glossário Atlas) ✅ DONE — commit `36c7136` (2026-04-29)
+
+**Resultado quantitativo do smoke test 20 laudos:**
+- C1 inconsistências antes (Phase A, prompt antigo): 28
+- C1 inconsistências depois (T12.5, prompt novo): 6
+- **Redução: 78.6%** (acima do threshold ≥70% — APROVADO)
+- Distribuição: 16 reduzidos / 3 sem mudança / 1 aumento (RPT_003856)
+- 0 parse failures, custo $0.0153 em 2:07min
+- 8 testes TDD em `tests/test_translation/test_c1_descriptors.py` (8/8 PASS)
+
+**Caso `⚠ RPT_003856` investigado:** não é regressão — fix detectou termo "arredondada" fora de pt_variants_acceptable (verdadeiro positivo); Phase A reportava erro de concordância (falso positivo refutado pela meta-validação). Documentado em `decision_log.md`.
+
+**Detalhamento abaixo registrado para reprodutibilidade do design.**
 
 **Files:**
 - Modify: `src/translation/prompt.py` (função `build_audit_prompt`, listas hardcoded em linhas 130–134)
@@ -2415,7 +2427,22 @@ git commit -m "fix(translation): derivar C1 do Atlas com variants acceptable (el
 
 ---
 
-### Task 12.6: Severidade clínica — substituir aprovado/reprovado binário por critical/major/minor 🔲 PENDING  ⚠ pré-requisito de T13
+### Task 12.6: Severidade clínica — substituir aprovado/reprovado binário por critical/major/minor ✅ DONE (commit pendente)
+
+**Progresso completo:**
+- ✅ Step 1: schema do campo `severity` no JSON output (`prompt.py:175-181`)
+- ✅ Step 2: `src/evaluation/severity.py` + `tests/test_evaluation/test_severity.py` — **12/12 testes PASS**
+- ✅ Step 3: rubrica de critical/major/minor em `prompt.py` (C1/C5/C7 com critério clínico)
+- ✅ Step 4: `parse_audit_response` aplica `apply_severity_override`
+- ✅ Step 5: smoke 5 laudos — 0 parse failures, 100% LLM severity válido
+- ✅ Step 6: smoke 20 laudos — **APROVADO**
+  - 0 parse failures
+  - Severity LLM válido **100%** em C1/C5/C7 (10/10)
+  - Distribuição: 0 critical / 1 major / 9 minor / 10 sem incs
+  - Custo $0.0126 em 1:37min
+- ✅ Step 7: decision_log com rubrica registrada por critério
+
+**Resultado downstream:** parser do auditor agora emite cada inconsistência com 3 campos novos (`severity`, `severity_method`, `severity_llm_raw`). Override mecânico em C2/C3/C4/C6 garante que erros clínicos objetivos sempre são `critical` independente do que LLM disser. T13/T20 podem agregar `has_critical_error` direto do output do auditor.
 
 **Goal:** Substituir binário "aprovado/reprovado" por taxonomia de severidade ancorada em **impacto clínico**, alinhada ao MQM (T22). Permite headline metric defensável na banca: **"taxa de erro crítico = X%"** em vez de "score médio 9.31/10" (número que precisa explicação).
 

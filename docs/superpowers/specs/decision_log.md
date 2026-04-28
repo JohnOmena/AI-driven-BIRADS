@@ -45,6 +45,17 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 
 **Reportagem:** `modifier_summary.json` (T18 Step 6) reporta `coverage_rate` explicitamente — banca vê quantos adjetivos efetivamente medidos.
 
+### Caso ⚠ RPT_003856 — investigação do único aumento de C1 no smoke T12.5
+
+| Lado | Inconsistência detectada | Classificação |
+|---|---|---|
+| Phase A (prompt antigo) | "DE MARGENS obscurecidas" — auditor reclamou que "obscurecido" deveria ser "obscurecidos" (concordância gênero/número) | **Falso positivo** — meta-validação refutou (`verdict=keep`, `rejected=1`); T18 cobre concordância morfológica |
+| T12.5 (prompt novo) | "calcificação arredondada" — tradutor usou "arredondada" para "redondeada", mas Atlas só tem `redonda/redondo` em pt_variants_acceptable | **Verdadeiro positivo** — tradutor usou termo fora do glossário recebido |
+
+**Conclusão metodológica:** o fix C1 não introduziu regressão — eliminou o falso positivo de concordância (delegado a T18) e detectou termo realmente fora do glossário. Smoke reportou `1→2` por variabilidade T=0; re-investigação retornou `1→1`. **Fix está mais sensível, não mais ruidoso.**
+
+**Decisão:** NÃO adicionar "arredondada" ao Atlas — CBR/SBM oficial usa apenas "redonda/redondo" como descritor BI-RADS. T17 vai categorizar "arredondada" como `unknown_for_term` ou `gender_variant` automaticamente (regra determinística).
+
 ### Cross-reference: política de variantes em C1 (T12.5) ↔ canonical_rate vs acceptable_rate (T17)
 
 **Contexto unificado:** C1 (auditor LLM) e T17 (análise léxica determinística) avaliam dimensões diferentes do MESMO invariante (preservação léxica BI-RADS), com a mesma política de variantes:
@@ -61,6 +72,29 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 - C1 e T17 coordenadas: **acceptable é o critério de pass/fail**; canonical é só evidência sobre evolução do glossário (não erro de tradução)
 
 **Resultado prático:** se T13 (com C1 fix) e T17 produzirem números similares de findings/anomalies em C1/léxico, alta concordância valida o fix de C1. Se discordarem, T22 (revisão MQM) resolve. Cross-reference explícito previne dupla-contagem em `composite_score`.
+
+## Severidade clínica (T12.6 — taxonomia critical/major/minor)
+
+| Decisão | Task | Justificativa | Referência |
+|---|---|---|---|
+| Override mecânico C2/C3/C4/C6 → severity sempre `critical` | T12.6 | Critérios objetivos: divergência detectada é por definição clinicamente impactante (categoria, medidas, lateralidade, negação). Não depende de julgamento LLM. | (princípio de design) |
+| LLM classifica severity em C1/C5/C7 | T12.6 | Critérios contextuais: descritores BI-RADS, omissões/adições, temporais. Severidade depende de contexto clínico. Validado pela revisão MQM (T22). | (decisão metodológica) |
+| Fallback `minor` para severity inválido em C1/C5/C7 | T12.6 | Conservador: não fingir severidade alta quando LLM não classificou. Campo `severity_method = "fallback_minor"` flag para auditoria. | (decisão de robustez) |
+| Preservar `severity_llm_raw` em todas as inconsistências | T12.6 | Permite auditoria pós-hoc do que LLM disse vs override mecânico. Útil para T22 e análise de erros. | (auditoria) |
+
+### Rubrica de severity por critério (registrada no prompt do auditor T12.6)
+
+| Critério | Tipo | Rubrica |
+|---|---|---|
+| **C1 descritores BI-RADS** | LLM (subjetivo) | `critical` se descritor afeta categoria final (ex: 'espiculada' → suspeita); `major` se omite descritor relevante; `minor` se variação estilística |
+| **C2 categoria BI-RADS** | mecânico | sempre `critical` |
+| **C3 medidas/números** | mecânico | sempre `critical` |
+| **C4 lateralidade/localização** | mecânico | sempre `critical` |
+| **C5 omissões/adições** | LLM (subjetivo) | `critical` se omite achado clinicamente relevante (massa, calcificação, distorção); `major` se omite descritor menor; `minor` se omite contextual |
+| **C6 inversões/negação** | mecânico | sempre `critical` |
+| **C7 temporais/achados associados** | LLM (subjetivo) | `critical` se 'novo achado' omitido; `major` se estabilidade temporal omitida; `minor` se referência a exame anterior |
+
+**Validação smoke (2026-04-29):** rubrica resultou em 100% de severity LLM válido (10/10 em C1/C5/C7) em smoke de 20 laudos. 0 parse failures. Distribuição final 0 critical / 1 major / 9 minor — coerente com amostra Phase A C1-heavy (sem erros C2/C3/C4/C6 que disparariam mecânico).
 
 ## Auditor C1 (T12.5 — derivação programática)
 

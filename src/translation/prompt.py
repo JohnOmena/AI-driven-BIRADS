@@ -147,6 +147,18 @@ C6. INVERSOES DE SENTIDO E ERROS DE NEGACAO: Ha alguma frase onde o sentido foi 
 
 C7. COMPARACOES TEMPORAIS E ACHADOS ASSOCIADOS: Referencias a exames anteriores, evolucao, estabilidade e todos os achados associados (retracao cutanea, espessamento, linfadenopatia, etc.) foram mantidos?
 
+SEVERIDADE CLINICA (classifique cada inconsistencia detectada):
+
+- critical: altera categoria BI-RADS, lateralidade, medida, negacao ou conduta clinica
+- major: altera informacao clinica relevante sem afetar categoria/conduta
+- minor: problema linguistico/terminologico sem impacto clinico
+
+Rubrica por criterio:
+- C1 (descritores): critical se descritor afeta categoria final (ex: 'espiculada' -> suspeita); major se omite descritor relevante; minor se variacao estilistica
+- C2/C3/C4/C6: SEMPRE critical (categoria/medida/lateralidade/negacao sao objetivos)
+- C5 (omissoes): critical se omite achado clinicamente relevante (massa, calcificacao, distorcao); major se omite descritor menor; minor se omite contextual
+- C7 (temporais/achados associados): critical se 'novo achado' omitido; major se estabilidade temporal omitida; minor se referencia a exame anterior
+
 {glossary_text}
 
 TEXTO ORIGINAL (Espanhol):
@@ -175,7 +187,8 @@ Responda EXATAMENTE no formato JSON abaixo, sem texto adicional antes ou depois:
       "criterio": "C1/C2/C3/C4/C5/C6/C7",
       "original": "trecho exato do texto original",
       "traducao": "trecho exato da traducao com problema",
-      "problema": "descricao precisa do problema encontrado"
+      "problema": "descricao precisa do problema encontrado",
+      "severity": "critical | major | minor"
     }}
   ]
 }}

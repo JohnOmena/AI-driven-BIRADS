@@ -300,9 +300,15 @@ def parse_audit_response(response_text: str) -> dict:
     Handles cases where the LLM wraps the JSON in markdown code blocks
     or adds extra text.
 
+    T12.6: aplica `apply_severity_override` em `inconsistencias`. Cada
+    inconsistência ganha 3 campos novos: `severity`, `severity_method`,
+    `severity_llm_raw`. Override mecânico em C2/C3/C4/C6 → sempre `critical`.
+
     Returns dict with keys: aprovado, score, inconsistencias.
     Falls back to a failed audit if parsing fails.
     """
+    from src.evaluation.severity import apply_severity_override
+
     text = response_text.strip()
 
     # Try to extract JSON from markdown code block
@@ -324,6 +330,8 @@ def parse_audit_response(response_text: str) -> dict:
             result["score"] = 0
         if "inconsistencias" not in result:
             result["inconsistencias"] = []
+        # T12.6: aplica severity override (não modifica original em apply_*)
+        result["inconsistencias"] = apply_severity_override(result["inconsistencias"])
         return result
     except (json.JSONDecodeError, ValueError):
         return {
