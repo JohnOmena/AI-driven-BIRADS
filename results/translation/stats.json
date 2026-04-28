@@ -1,0 +1,25 @@
+{
+  "total_reports": 4357,
+  "translated_successfully": 4455,
+  "audit_approved": 2846,
+  "audit_review": 1,
+  "audit_rejected": 0,
+  "avg_audit_score": 9.31,
+  "avg_similarity": 0.9571,
+  "translator_model": "gemini-2.5-flash",
+  "auditor_model": "deepseek-v3",
+  "translator_usage": {
+    "model": "gemini-2.5-flash",
+    "total_input_tokens": 963525,
+    "total_output_tokens": 92795,
+    "total_cost_usd": 0.2002,
+    "cost_limit_usd": 50.0
+  },
+  "auditor_usage": {
+    "model": "deepseek-v3",
+    "total_input_tokens": 1506853,
+    "total_output_tokens": 180951,
+    "total_cost_usd": 0.3045,
+    "cost_limit_usd": 50.0
+  }
+}
