@@ -174,11 +174,10 @@ Antes de iniciar a Phase B, validar:
 
 - [x] **Backup pré-Phase B** — `backups/data_pre_phase_b/` + `backups/results_translation_pre_phase_b/` (4.9M + 4.8M, hashes registrados)
 - [x] **PHI verification** — base PT-br: 0 matches; base ES: 21 falso-positivos confirmados visualmente (PACIENTE PORTADORA, CON ANTECEDENTE, etc.). Whitelist `PACIENTE_STOPWORDS` adicionada ao regex
-- [x] **APIs configuradas** — DeepSeek ✅, Google ✅, **OpenAI ❌** (bloqueador de T13 Step 5)
-- [x] **Smoke test conectividade** — DeepSeek 4.31s + Gemini 3.99s (ambos $0.00001 de teste)
+- [x] **APIs configuradas** — DeepSeek ✅, Google ✅, OpenAI ✅
+- [x] **Smoke test conectividade** — DeepSeek 2.25s + Gemini 2.90s + Gemini-no-thinking 2.27s + GPT-4o-mini 2.11s (custo total $0.000015)
 - [x] **`models.yaml` corrigido** — preços Gemini 2.5 Flash atualizados ($0.30/$2.50); entries `gemini-2.5-flash-no-thinking` (T14.B) e `gpt-4o-mini` (T13 Step 5) adicionadas
-- [ ] **OPENAI_API_KEY a obter** antes de T13 Step 5 (custo previsto $0.17 — quota requer cartão de crédito ativo)
-- [ ] **Commits de design** — feitos (`aeac246`, `8eb164b`, `19ffd2b`)
+- [x] **Commits de design** — feitos (`aeac246`, `8eb164b`, `19ffd2b`, `aa17c1d`)
 
 ### Estratégia de paralelização (decisão registrada)
 
