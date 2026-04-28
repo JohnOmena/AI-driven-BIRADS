@@ -1,5 +1,7 @@
 """Build prompts for translation and audit of mammography reports."""
 
+from src.translation.c1_descriptors import build_c1_block
+
 
 def build_translation_prompt(report_text: str, glossary_text: str) -> str:
     """Build a translation prompt ensuring fidelity and BI-RADS lexicon preservation.
@@ -118,6 +120,11 @@ def build_audit_prompt(original_text: str, translated_text: str, glossary_text: 
     Returns:
         Complete prompt string for the auditor LLM.
     """
+    # T12.5: derivar bloco C1 dinamicamente do glossário Atlas (com pt_variants_acceptable)
+    # em vez de listar termos hardcoded. Elimina ~80% dos falsos positivos C1
+    # identificados na Phase A (70/86 keeps refutados pela meta-validação).
+    c1_block = build_c1_block()
+
     prompt = f"""Voce e um auditor medico especializado em radiologia mamaria e no sistema BI-RADS (ACR BI-RADS Atlas, 5a Edicao).
 
 Sua tarefa e auditar a qualidade de uma traducao de laudo de mamografia do espanhol para o portugues do Brasil.
@@ -126,13 +133,7 @@ Compare CUIDADOSAMENTE o TEXTO ORIGINAL com a TRADUCAO e avalie CADA UM dos crit
 
 CRITERIOS DE AUDITORIA:
 
-C1. DESCRITORES BI-RADS (PRIORIDADE MAXIMA): Os descritores padronizados BI-RADS foram traduzidos corretamente para o portugues conforme o glossario? Verifique CADA descritor presente no original:
-    - Forma: ovalado/a, redondo/a, irregular, lobulado/a
-    - Margem: circunscrito/a, obscurecido/a, microlobulado, indistinto, espiculado/a
-    - Densidade: isodenso/a, hipodenso, hiperdenso, heterogeneo, homogeneo
-    - Morfologia de calcificacoes: puntiforme, amorfo, pleomorfico, lineal fino, ramificado
-    - Distribuicao: agrupada, segmentar, linear, regional, difusa, ductal
-    Verifique tambem concordancia de genero e numero dos descritores.
+{c1_block}
 
 C2. CATEGORIA BI-RADS: A classificacao BI-RADS (0, 1, 2, 3, 4A, 4B, 4C, 5, 6) foi mantida exatamente igual? Nao pode haver alteracao, omissao ou reinterpretacao da categoria.
 

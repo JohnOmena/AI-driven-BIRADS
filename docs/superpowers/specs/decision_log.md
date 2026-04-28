@@ -12,6 +12,56 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 | 25 adjetivos com `forms_pt`/`forms_es` (T18 prereq) | T12 Step 3.7 | Cobre M-SING/F-SING/M-PLUR/F-PLUR. 22/25 com >=1 ocorrência no corpus | (verificação empírica 2026-04-29) |
 | 3 adjetivos com 0 ocorrências no corpus PT (lobulado, retraído, espessado) | T12 | T18 vota abstain (`n_compared=0`) nesses casos. Categoria expressa via substantivos próximos (retração, espessamento) que têm entries próprias | (verificação empírica 2026-04-29) |
 
+### 18 termos novos no Atlas vs glossário antigo (detalhamento por linha)
+
+| # | Termo (es) | Categoria | pt_canonical | Justificativa |
+|---|---|---|---|---|
+| 1 | bi-rads 0 | categories_birads | BI-RADS 0 | Categoria oficial Atlas; antigo só tinha "BI-RADS" genérico. Essencial para H4 (preservação de categoria via regex) |
+| 2 | bi-rads 1 | categories_birads | BI-RADS 1 | idem |
+| 3 | bi-rads 2 | categories_birads | BI-RADS 2 | idem |
+| 4 | bi-rads 3 | categories_birads | BI-RADS 3 | idem |
+| 5 | bi-rads 4 | categories_birads | BI-RADS 4 | idem |
+| 6 | bi-rads 4a | categories_birads | BI-RADS 4A | Subcategoria 4A/4B/4C necessária para auditoria fina |
+| 7 | bi-rads 4b | categories_birads | BI-RADS 4B | idem |
+| 8 | bi-rads 4c | categories_birads | BI-RADS 4C | idem |
+| 9 | bi-rads 5 | categories_birads | BI-RADS 5 | Categoria oficial Atlas |
+| 10 | bi-rads 6 | categories_birads | BI-RADS 6 | idem |
+| 11 | engrosamiento cutáneo | associated_features | espessamento cutâneo | Achado associado oficial Atlas — antigo não tinha categoria dedicada |
+| 12 | espessado | associated_features | espessado | Adjetivo com forms_pt; corpus tem 0 ocorrências (T18 abstain) |
+| 13 | grosera heterogénea | calcifications_morphology | grosseira heterogênea | Tipo morfológico oficial Atlas (calcificações grosseiras heterogêneas) |
+| 14 | linfadenopatía | associated_features | linfadenopatia | Achado clínico relevante para diagnóstico |
+| 15 | oval | mass_shape | oval | Forma CBR canônica; variantes ovalado/ovalada em pt_variants_acceptable (Ajuste 5) |
+| 16 | retracción cutánea | associated_features | retração cutânea | Achado associado relevante |
+| 17 | retracción del pezón | associated_features | retração mamilar | idem; alternativas "retração do mamilo" em variants |
+| 18 | retraído | associated_features | retraído | Adjetivo com forms_pt; corpus tem 0 ocorrências (T18 abstain) |
+
+### 3 adjetivos com 0 ocorrências no corpus PT (T18 abstain by design)
+
+| Adjetivo | Categoria | Diagnóstico | T18 vota |
+|---|---|---|---|
+| `lobulado` | mass_shape | Em laudos PT-br, "microlobulado" é mais usado (entry própria, 6 ocorrências). "Lobulado" puro raramente aparece. | abstain (`n_compared=0`) |
+| `retraído` | associated_features | Categoria expressa via substantivo "retração cutânea/mamilar" (entries próprias). Adjetivo `retraído` puro raro. | abstain (`n_compared=0`) |
+| `espessado` | associated_features | Idem — categoria via "espessamento cutâneo" (entry própria). Adjetivo `espessado` raro. | abstain (`n_compared=0`) |
+
+**Reportagem:** `modifier_summary.json` (T18 Step 6) reporta `coverage_rate` explicitamente — banca vê quantos adjetivos efetivamente medidos.
+
+### Cross-reference: política de variantes em C1 (T12.5) ↔ canonical_rate vs acceptable_rate (T17)
+
+**Contexto unificado:** C1 (auditor LLM) e T17 (análise léxica determinística) avaliam dimensões diferentes do MESMO invariante (preservação léxica BI-RADS), com a mesma política de variantes:
+
+| Dimensão | Fonte | Métrica primária | Métrica secundária | Critério H2 |
+|---|---|---|---|---|
+| **Auditor LLM (C1)** | T12.5/T13 | passa se variante usada está em `pt_variants_acceptable` | — | C1 não-falho contribui em Q_audit |
+| **Léxico determinístico (T17)** | F5.B | `overall_acceptable_rate` (canonical ∪ acceptable) | `overall_canonical_rate` (só canonical) | `overall_acceptable_rate` ≥ 0.99 |
+
+**Por que ambos usam a mesma política de "aceitar variants_acceptable":**
+- Tradutor (Phase A) recebeu glossário antigo (95 termos)
+- Atlas tem `pt_canonical` que pode diferir do antigo (ex: `oval` vs `ovalado`)
+- Punir o tradutor por usar a forma antiga = falso positivo retroativo
+- C1 e T17 coordenadas: **acceptable é o critério de pass/fail**; canonical é só evidência sobre evolução do glossário (não erro de tradução)
+
+**Resultado prático:** se T13 (com C1 fix) e T17 produzirem números similares de findings/anomalies em C1/léxico, alta concordância valida o fix de C1. Se discordarem, T22 (revisão MQM) resolve. Cross-reference explícito previne dupla-contagem em `composite_score`.
+
 ## Auditor C1 (T12.5 — derivação programática)
 
 | Decisão | Task | Justificativa | Referência |

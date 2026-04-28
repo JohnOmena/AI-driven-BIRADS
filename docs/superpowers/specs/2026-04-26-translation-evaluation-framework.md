@@ -130,6 +130,8 @@ Cada fase do pipeline existe para alimentar pelo menos uma destas hipóteses.
 
 ### F1 — Reauditoria DeepSeek (3.840 laudos faltantes)
 
+**Pré-requisito (T12.5):** o prompt de auditoria foi corrigido para derivar a lista C1 programaticamente do glossário Atlas (com `pt_variants_acceptable`). **Smoke test confirmado em 2026-04-29 com 78.6% de redução** em FP C1 (28→6 em 20 laudos da Phase A) — acima do threshold ≥70%. Sem este fix, T13 reproduziria os falsos positivos C1 em escala (4.357 laudos).
+
 **Objetivo:** reproduzir auditoria completa C1–C7 + meta-validação para os laudos que perderam o detalhe granular nos restarts.
 
 **Input:**
