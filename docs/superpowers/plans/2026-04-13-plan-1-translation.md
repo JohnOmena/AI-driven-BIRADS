@@ -168,6 +168,53 @@ notebooks/
 
 ---
 
+## Pre-flight checklist (executar antes de T12)
+
+Antes de iniciar a Phase B, validar:
+
+- [x] **Backup pré-Phase B** — `backups/data_pre_phase_b/` + `backups/results_translation_pre_phase_b/` (4.9M + 4.8M, hashes registrados)
+- [x] **PHI verification** — base PT-br: 0 matches; base ES: 21 falso-positivos confirmados visualmente (PACIENTE PORTADORA, CON ANTECEDENTE, etc.). Whitelist `PACIENTE_STOPWORDS` adicionada ao regex
+- [x] **APIs configuradas** — DeepSeek ✅, Google ✅, **OpenAI ❌** (bloqueador de T13 Step 5)
+- [x] **Smoke test conectividade** — DeepSeek 4.31s + Gemini 3.99s (ambos $0.00001 de teste)
+- [x] **`models.yaml` corrigido** — preços Gemini 2.5 Flash atualizados ($0.30/$2.50); entries `gemini-2.5-flash-no-thinking` (T14.B) e `gpt-4o-mini` (T13 Step 5) adicionadas
+- [ ] **OPENAI_API_KEY a obter** antes de T13 Step 5 (custo previsto $0.17 — quota requer cartão de crédito ativo)
+- [ ] **Commits de design** — feitos (`aeac246`, `8eb164b`, `19ffd2b`)
+
+### Estratégia de paralelização (decisão registrada)
+
+**Ambiente:** Windows + Git Bash → `tmux` e `screen` indisponíveis. **Decisão:** usar `nohup` + background job (mesmo padrão da Phase A, já validado).
+
+**Setup para T13 + T14.B/T15/T16 em paralelo:**
+
+```bash
+# Sessão 1 — T13 em background (6h)
+nohup venv/Scripts/python.exe -u -m src.evaluation.reaudit_deepseek \
+  > results/translation/reaudit_deepseek.log 2>&1 &
+echo $! > results/translation/reaudit_deepseek.pid
+disown
+
+# Sessão 2 — sua janela ativa: desenvolver T14.B/T15/T16
+# Monitoramento sob demanda (não polling):
+tail -n 50 results/translation/reaudit_deepseek.log
+ps -p $(cat results/translation/reaudit_deepseek.pid) || echo "T13 finalizou ou morreu"
+```
+
+**Mitigações de risco:**
+- **`-u`** flag: stdout sem buffer (log atualiza em tempo real)
+- **`disown`**: isola do shell pai (sobrevive a fechamento de terminal, embora não a reboot)
+- **PID em arquivo**: monitoramento sem `ps -ef | grep`
+- **Smoke test (Step 1.5)** rodado primeiro em foreground — só vai para background se passar
+
+**Quando NÃO paralelizar:**
+- Se smoke test (Step 1.5) ainda não passou → rodar em foreground primeiro
+- Se está depurando algo → sequencial é mais simples mentalmente
+- Para T22 (revisão humana 3-4h) — paralelizar não faz sentido (fora da máquina)
+
+**Acessórios criados:**
+- `scripts/smoke_test_apis.py` — connectividade DeepSeek + Gemini (rodado pré-Phase B)
+
+---
+
 ## Governance & Operational Documentation
 
 Antes de iniciar a Phase B (T12 em diante), criar 6 artefatos de governança que protegem reprodutibilidade, defensibilidade na banca, e rastreabilidade pós-execução. Cada um resolve uma lacuna específica do plano hoje.
@@ -7139,14 +7186,25 @@ import re
 import pandas as pd
 import sys
 
+# Stopwords clínicas pós-"paciente" (descartar falso-positivo)
+# Verificado empiricamente em 2026-04-29 sobre data/reports_raw_canonical.csv:
+# 21 matches do padrão ingênuo eram TODOS falso-positivos (PACIENTE PORTADORA,
+# PACIENTE CON ANTECEDENTE, PACIENTE EN CONTROL, etc.). Whitelist evita ruído.
+PACIENTE_STOPWORDS = (
+    r"(?i)\b(con|sin|de|en|que|portadora?|presenta|refiere|"
+    r"con\s+antecedente|ya\s+fue|requiere|es\s+|fue\s+)"
+)
+
+
 # Padrões PII comuns em laudos médicos
 PII_PATTERNS = [
-    (r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b",          "CPF"),
-    (r"\b\d{2}/\d{2}/\d{4}\b",                       "Data nascimento"),
-    (r"(?i)\bpaciente:?\s*[A-Z][a-z]+ [A-Z][a-z]+", "Nome paciente"),
-    (r"(?i)\bdr[a]?\.?\s+[A-Z][a-z]+ [A-Z][a-z]+",  "Nome médico"),
-    (r"\b\d{8,}\b",                                  "Número longo (CRM/RG/registro)"),
-    (r"(?i)\bRG\s*:?\s*\d+",                         "RG explícito"),
+    (r"\b\d{3}\.?\d{3}\.?\d{3}-?\d{2}\b",                            "CPF"),
+    (r"\b\d{2}/\d{2}/\d{4}\b",                                        "Data nascimento"),
+    # Nome paciente: "paciente <Nome Sobrenome>" SEM stopword clínica antes do nome
+    (rf"(?i)\bpaciente\s*:?\s*(?!{PACIENTE_STOPWORDS})[A-Z][a-z]+ [A-Z][a-z]+", "Nome paciente"),
+    (r"(?i)\bdr[a]?\.?\s+[A-Z][a-z]+ [A-Z][a-z]+",                    "Nome médico"),
+    (r"\b\d{8,}\b",                                                    "Número longo (CRM/RG/registro)"),
+    (r"(?i)\bRG\s*:?\s*\d+",                                           "RG explícito"),
 ]
 
 df = pd.read_excel("results/translation/human_review_for_radiologist.xlsx",

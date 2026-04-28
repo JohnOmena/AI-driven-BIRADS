@@ -20,9 +20,27 @@ models:
     provider: google
     model_id: gemini-2.5-flash
     env_key: GOOGLE_API_KEY
+    cost_per_1m_input: 0.30           # CORRIGIDO 2026-04-29 (era 0.15)
+    cost_per_1m_output: 2.50          # CORRIGIDO 2026-04-29 (era 0.60)
+    cost_limit_usd: 50.00
+
+  gemini-2.5-flash-no-thinking:       # T14.B: BT com thinking_budget=0
+    provider: google
+    model_id: gemini-2.5-flash
+    env_key: GOOGLE_API_KEY
+    thinking_budget: 0
+    cost_per_1m_input: 0.30
+    cost_per_1m_output: 2.50
+    cost_limit_usd: 10.00
+
+  gpt-4o-mini:                         # T13 Step 5: calibração inter-auditor
+    provider: openai
+    model_id: gpt-4o-mini-2024-07-18
+    api_base: https://api.openai.com/v1
+    env_key: OPENAI_API_KEY
     cost_per_1m_input: 0.15
     cost_per_1m_output: 0.60
-    cost_limit_usd: 50.00
+    cost_limit_usd: 5.00
 
   llama-3.3-70b:
     provider: together

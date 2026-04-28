@@ -37,3 +37,6 @@ Thumbs.db
 # Claude/Serena internal
 .claude/
 .serena/
+
+# Local backups (pre-Phase B snapshot)
+backups/
