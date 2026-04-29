@@ -2687,7 +2687,36 @@ git commit -m "feat(evaluation): T12.6 severidade clinica (critical/major/minor)
 
 ---
 
-### Task 13: F1 — Re-audit remaining laudos with DeepSeek 🔲 PENDING
+### Task 13: F1 — Re-audit remaining laudos with DeepSeek 🟡 IN PROGRESS — Step 1+1.5 DONE, Step 2 RODANDO
+
+**Estado em 2026-04-29:**
+- ✅ Step 0: audit Phase A correções → PROCEED_NORMALLY (commit `19ffd2b`)
+- ✅ Step 1: `src/evaluation/reaudit_deepseek.py` implementado
+  - Schema separado: `audit_raw` + `meta_validation` (validated/refuted)
+  - Severity layer (T12.6) inline via `parse_audit_response`
+  - Resume idempotente testado (5+10=15 records, sem duplicatas)
+  - CHECKPOINT_INTERVAL=500 com auto-commit+push
+- ✅ Step 1.5: smoke estratificado 20 laudos APROVADO
+  - Composição: 5 com C1/Phase A + 5 com lat/med/neg + 3 review/rejected + 5 random/cat + 2 duplicatas
+  - 6/6 critérios verdes (1 WARN custo: $0.000567/laudo extrapolado vs estimado $0.000060 — correto, coerente com Phase A audit)
+  - 0 parse failures, severity LLM válido, audit_final_status 70%/30% saudável
+- 🟡 Step 2: full run em background (PID 314, nohup)
+  - Estado: 31 records / 4357 totais; ETA ~6h
+  - Custo extrapolado: **~$2.50** (não $0.27 — corrigido após smoke)
+- 🔲 Step 3: verify cobertura
+- 🔲 Step 3.5: build summary JSON
+- 🔲 Step 4: commit final do JSONL (checkpoints intermediários a cada 500)
+- 🔲 Step 5: calibração GPT-4o-mini sobre subset ~250
+
+**Plano de monitoramento durante full run:**
+```bash
+# Progresso
+wc -l results/translation/audit_deepseek.jsonl
+tail -3 results/translation/reaudit_deepseek.log
+
+# Health check
+ps -p $(cat results/translation/reaudit_deepseek.pid) && echo "RUNNING" || echo "DEAD"
+```
 
 **Files:**
 - Create: `scripts/audit_phase_a_corrections.py` (Step 0)

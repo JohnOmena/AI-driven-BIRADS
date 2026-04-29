@@ -40,3 +40,8 @@ Thumbs.db
 
 # Local backups (pre-Phase B snapshot)
 backups/
+
+# T13 in-progress (commits via checkpoint do reaudit_deepseek.py)
+results/translation/reaudit_deepseek.pid
+results/translation/reaudit_deepseek.log
+results/translation/smoke_t13_reaudit.jsonl

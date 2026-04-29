@@ -8,7 +8,7 @@ Dashboard único de progresso. Cada linha registra os gates passados em cada tas
 | **T12** | ✅ Atlas schema definido | ✅ build glossário + collect variantes | ✅ verify_backward_compat exit 0 + verify_morphology exit 0 | ✅ 103 termos / 270 variantes / 25 forms; 14/14 tests passed; 18 termos novos mapeados | `4506368` | **DONE** |
 | **T12.5** | ✅ c1_descriptors.py + 8 TDD pass | ✅ smoke 5 (estrutura) + smoke 20 (critério) | ✅ redução **78.6%** em C1 (28→6) acima do threshold 70% | ✅ 0 parse failures, custo $0.015 | `36c7136` | **DONE** |
 | **T12.6** | ✅ severity.py + 12 TDD pass | ✅ smoke 5 estrutura + smoke 20 critério | ✅ override mecânico OK; LLM severity 100% válido | ✅ 0 parse failures, custo $0.013, 80/80 testes regressão sem quebrar | `f48294a` | **DONE** |
-| T13 | 🔲 Step 0 (audit Phase A — feito offline em `19ffd2b`) | 🔲 smoke 1.5 + full nohup | 🔲 verify cross-source | 🔲 | 🔲 | PENDING |
+| **T13** | ✅ Step 0 audit Phase A (`19ffd2b`) + smoke estratificado 20 laudos | 🟡 Step 1+1.5 DONE; Step 2 RODANDO em nohup PID 314 | ⏳ smoke gate 6/6 verde (1 WARN custo: $0.000567/laudo, coerente com Phase A) | ⏳ ~6h ETA | ⏳ | **IN PROGRESS** |
 | T13 Step 5 | 🔲 | 🔲 calibração GPT-4o-mini ~250 | 🔲 kappa por critério | 🔲 | 🔲 | PENDING |
 | T14.A | 🔲 | 🔲 fix client.py + models.yaml retroativo | 🔲 thoughts contados | 🔲 | 🔲 | PENDING |
 | T14.B | 🔲 smoke 10 | 🔲 BT amostral ~250 | 🔲 calibração thresholds | 🔲 | 🔲 | PENDING |
