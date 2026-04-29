@@ -1,0 +1,66 @@
+{
+  "n_records": 250,
+  "metrics": {
+    "cosine_es_es_bt": {
+      "median": 0.97,
+      "mean": 0.9727,
+      "p5": 0.9423,
+      "p95": 0.9971,
+      "min": 0.6225,
+      "max": 0.9981,
+      "n": 250
+    },
+    "bertscore_f1_es_es_bt": {
+      "median": 0.9867,
+      "mean": 0.9854,
+      "p5": 0.9753,
+      "p95": 0.993,
+      "min": 0.9108,
+      "max": 0.9945,
+      "n": 250
+    },
+    "chrf_es_es_bt": {
+      "median": 93.509,
+      "mean": 92.2069,
+      "p5": 86.4806,
+      "p95": 96.7452,
+      "min": 9.277,
+      "max": 98.276,
+      "n": 250
+    },
+    "chrf_ci_es_es_bt": {
+      "median": 93.617,
+      "mean": 92.8354,
+      "p5": 86.9968,
+      "p95": 96.9943,
+      "min": 80.852,
+      "max": 98.363,
+      "n": 250
+    },
+    "bleu_es_es_bt": {
+      "median": 83.755,
+      "mean": 82.4725,
+      "p5": 71.0922,
+      "p95": 92.0448,
+      "min": 3.009,
+      "max": 95.373,
+      "n": 250
+    },
+    "bleu_ci_es_es_bt": {
+      "median": 84.7405,
+      "mean": 83.705,
+      "p5": 73.162,
+      "p95": 92.1513,
+      "min": 54.015,
+      "max": 95.556,
+      "n": 250
+    }
+  },
+  "structural_cross_check": {
+    "category_match": 0.956,
+    "measures_match": 1.0,
+    "laterality_match": 1.0,
+    "all_three_match": 0.956
+  },
+  "caveat_case_sensitivity": "66% da amostra ES_orig em CAPS; chrF_ci elimina o outlier RPT_001383 (chrF cs 9.28 -> ci 80.85). Cosine e BERTScore robustos a case (model-based). Reportar ambas (case-sensitive + case-insensitive) por rigor metodologico."
+}

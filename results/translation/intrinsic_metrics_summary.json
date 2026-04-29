@@ -36,6 +36,16 @@
       "min": 0.875,
       "max": 1.0833,
       "n": 4355
+    },
+    "chrf_ci": {
+      "median": 54.3267,
+      "mean": 54.2488,
+      "p5": 49.848,
+      "p95": 58.3434,
+      "min": 44.2234,
+      "max": 63.8881,
+      "n": 4355,
+      "note": "case-insensitive chrF; 43.3% da base ES em CAPS (decision_log)"
     }
   },
   "metrics_appendix": {
