@@ -1,0 +1,15 @@
+{
+  "total_laudos": 4355,
+  "laudos_com_pelo_menos_1_modifier_comparado": 2822,
+  "coverage_rate": 0.648,
+  "n_modifiers_total_compared": 5164,
+  "preservation_rate_global": 0.9903,
+  "n_divergences_total": 50,
+  "divergence_breakdown": {
+    "gender": 44,
+    "number": 6,
+    "both": 0
+  },
+  "preservation_rate_p5_duplicates": 1.0,
+  "threshold_empirical": 1.0
+}
