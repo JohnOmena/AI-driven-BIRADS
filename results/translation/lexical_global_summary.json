@@ -1,0 +1,11 @@
+{
+  "n_records": 4355,
+  "n_terms_analyzed": 62,
+  "total_es_occurrences": 32998,
+  "total_pt_occurrences": 34428,
+  "overall_canonical_rate": 0.9555,
+  "overall_acceptable_rate": 1.0,
+  "n_anomalies": 0,
+  "n_laudos_with_loss_isolated": 34,
+  "n_laudos_with_loss_critical": 24
+}
