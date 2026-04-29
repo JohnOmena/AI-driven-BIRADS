@@ -45,3 +45,7 @@ backups/
 results/translation/reaudit_deepseek.pid
 results/translation/reaudit_deepseek.log
 results/translation/smoke_t13_reaudit.jsonl
+
+# Background task ephemera
+results/translation/intrinsic_metrics.log
+results/translation/intrinsic_metrics.pid
