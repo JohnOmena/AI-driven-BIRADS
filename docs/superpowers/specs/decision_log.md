@@ -160,6 +160,13 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 |---|---|---|---|
 | Agrupar BI-RADS 5+6 como `5-6` (alta suspeita) | H6 (sem viés BI-RADS) | Distribuição: cat 5 (n=16), cat 6 (n=5) — ambos < 30 mínimo para Kruskal-Wallis defensável. Agrupamento clinicamente coerente: ambas são categorias ACR BI-RADS de alta suspeita maligna. Cat 4 (n=52) acima do threshold, mantida individualmente. **Resultado: 6 estratos para teste estatístico** (0, 1, 2, 3, 4, '5-6' com n=21). Análise descritiva separada de 5 e 6 disponível como apêndice em T23. | T20 armazena `birads_label` original (0-6 puro) em `validation_results.jsonl`. Agrupamento 5+6 acontece **apenas em T23 §4** (estratificação na renderização do notebook), **NÃO no schema** — preserva ground truth para análises futuras. |
 
+## T23 apêndices descritivos (pré-computados)
+
+| Apêndice | Achado | Implicação |
+|---|---|---|
+| BI-RADS 5 e 6 individualmente (n=16, n=5) | Cat 5: BERT 0,9565 cosine 0,9808 chrF_ci 55,93. Cat 6: BERT 0,9575 cosine 0,9798 chrF_ci 54,12. **Comparáveis ou MELHORES** que estratos maiores (todos os 7 estratos têm BERT 0,953-0,958 e cosine 0,964-0,981). | **Suporta H6 com folga** mesmo com agrupamento 5+6: não há degradação nas categorias raras. Reforça que o tradutor performa uniformemente cross-categoria. |
+| T15 outliers chrF_ci<50 (n=253; 5,8%) | Os 5 piores (chrF_ci 44-46) são laudos PT-br curtos (350-540 chars) com template padronizado "MAMOGRAFIA DIGITAL BILATERAL CRANIOCAUDAL E MÉDIO-LATERAL OBLÍQUAS...". BERTScore 0,94-0,95 e cosine 0,91-0,98 mantidos. length_ratio outliers: 0,95 (vs 0,98 geral). | **Caveat conhecido na literatura:** chrF char n-gram é instável em texto curto/template. Reportar BERTScore como métrica primária para H1. Sem ação corretiva. |
+
 ## Bugs corrigidos retroativamente
 
 | Bug | Task | Diagnóstico | Fix | Impacto |

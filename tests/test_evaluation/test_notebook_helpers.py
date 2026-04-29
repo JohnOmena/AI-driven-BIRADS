@@ -7,6 +7,7 @@ from src.evaluation.notebook_helpers import (
     median_with_ci,
     proportion_with_ci,
     rate_with_ci,
+    holm_bonferroni,
     build_executive_summary,
 )
 
@@ -82,3 +83,21 @@ def test_proportion_with_ci_zero_total():
     """total=0 → None safe."""
     p, lo, hi = proportion_with_ci(0, 0)
     assert p is None and lo is None and hi is None
+
+
+def test_holm_bonferroni_8_hypotheses():
+    """Wrapper retorna p_corrected + reject array para as 8 hipóteses."""
+    p_raw = [0.04] * 8
+    p_corr, reject = holm_bonferroni(p_raw, alpha=0.05)
+    assert len(p_corr) == 8
+    assert len(reject) == 8
+    # 0.04 * 8 = 0.32 — pior caso de Holm para 8 p-values iguais
+    assert not any(reject)
+
+
+def test_holm_bonferroni_keeps_smallest_significant():
+    """Quando 1 p-value muito pequeno, Holm mantém significância dele."""
+    p_raw = [0.001, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    p_corr, reject = holm_bonferroni(p_raw, alpha=0.05)
+    assert reject[0] is True  # menor p sobrevive correção
+    assert not any(reject[1:])

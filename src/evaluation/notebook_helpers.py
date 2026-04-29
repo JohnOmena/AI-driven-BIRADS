@@ -45,6 +45,16 @@ def rate_with_ci(values, alpha: float = 0.05, n_resamples: int = 10000):
     return median_with_ci([float(v) for v in values], alpha, n_resamples)
 
 
+def holm_bonferroni(p_values, alpha: float = 0.05):
+    """Correção Holm-Bonferroni FWER (anti-p-hacking nas 8 hipóteses pré-registradas).
+
+    Returns: (p_corrected, reject) — listas com p ajustados e booleanos de rejeição.
+    """
+    from statsmodels.stats.multitest import multipletests
+    reject, p_corr, _, _ = multipletests(list(p_values), alpha=alpha, method="holm")
+    return list(p_corr), [bool(r) for r in reject]
+
+
 def build_executive_summary(records, summaries) -> pd.DataFrame:
     """Tabela 1-página com 3 taxas separadas (Ajuste #5):
       - clinical_pass:  ignora modifier-only failures
