@@ -260,6 +260,44 @@ DeepSeek-V3 mantém-se como **auditor primário** com base em:
 
 **Pré-registro funcionando como deveria:** amarrou hipóteses, mas evidência empírica revelou premissas equivocadas — revisão honesta, não p-hacking.
 
+### Step 5b — Calibração DeepSeek↔Claude Haiku 4.5 (extensão pré-registrada)
+
+**Pré-registrado em commit ANTES de qualquer execução do Haiku** (timestamp imutável via tag `t13-step5b-pre-registered`).
+
+**Motivação:**
+- Step 5 original revelou GPT-4o-mini como calibrador inadequado (4/4 GPT-only criticals = hallucinations; 80% C5 hallucinations).
+- Critérios mecânicos (C2/C3/C4) tiveram massa insuficiente para κ informativo (premissa equivocada do pré-registro original).
+- **Adicionamos Claude Haiku 4.5 como TERCEIRO auditor** para fortalecer evidência triangular — **não como substituto** do calibrador anterior, **não como validador retroativo**.
+
+**Compromissos pré-registrados (anti-p-hacking):**
+
+1. **Reportaremos os 3 κ independente do resultado**: DeepSeek↔GPT, DeepSeek↔Haiku, GPT↔Haiku. Mesmo que algum dê pior que o esperado.
+2. **Step 5 (com GPT-4o-mini) NÃO será removido nem reescrito**. Permanece com seu caveat sobre hallucinations.
+3. **DeepSeek-V3 mantém-se auditor primário INDEPENDENTE do κ Haiku**. Decisão fundamentada em outras fontes (T15-T19) e T22 humano.
+4. **Step 5b é COMPLEMENTO de evidência**, não validador retroativo nem substituição.
+
+**Critérios pré-registrados de interpretação:**
+
+| κ DeepSeek↔Haiku | Interpretação |
+|---|---|
+| ≥ 0,80 | **DeepSeek-V3 validado por 3ª família LLM (Anthropic).** GPT-4o-mini confirmado como outlier por viés de hallucination. |
+| 0,60 – 0,79 | **Concordância substantiva** entre DeepSeek e Haiku; GPT-4o-mini outlier. Calibração LLM-LLM defensável com ressalvas em C5. |
+| < 0,60 | **Calibração LLM-LLM inadequada para esta tarefa em geral.** T22 (humano) é gold standard, conforme já planejado. Achado metodológico sobre limitações de LLM-as-judge. |
+
+**Independente do resultado, Step 5b não revoga DeepSeek como primário** — apenas adiciona/subtrai confiança.
+
+**Estimativa de custo:** ~$1,00 (Haiku 4.5 a $1/$5 por 1M tokens, 250 laudos × ~2K tokens médios).
+
+**Sequência de execução:**
+1. Adicionar `_generate_anthropic` ao LLMClient (com TDD)
+2. Adicionar `claude-haiku-4-5` em `configs/models.yaml`
+3. Refatorar `calibrate_audit.py` para aceitar `--auditor` (mantém output GPT inalterado; novo output `calibration_audit_haiku.jsonl`)
+4. Smoke 5 com Haiku (~$0,02)
+5. Full 250 com Haiku (~$1,00, ~30 min)
+6. Computar κ DS↔Haiku + tabela 3-vias DS↔GPT, DS↔Haiku, GPT↔Haiku
+7. Spot check qualitativo de divergências Haiku
+8. Reportar tudo
+
 **Estratificação da amostra (n=250):**
 - **6 críticos** (100% — Tier 1 obrigatório)
 - **13 major** (100% — obrigatório)
