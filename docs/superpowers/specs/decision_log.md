@@ -165,6 +165,25 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 | **0,40 – 0,59** | `INVESTIGATE` | Concordância moderada. **Pausar** antes de aceitar; investigar discordâncias críticas com radiologista (T22 antecipado). |
 | **< 0,40** | `DOWNGRADE` | Auditor primário sob suspeita. **Pausar Phase B**; revisão completa de prompt/criteria antes de prosseguir. |
 
+### Adendo Step 5 (pré-registrado durante execução parcial 70/250 — ainda anti-p-hacking)
+
+**Motivação:** os 7 critérios têm peso metodológico desigual no pipeline:
+- **C2/C3/C4/C6** sofrem `mechanical override` (T12.6) → qualquer flag → severity=critical → afeta H8 diretamente
+- **C1/C5/C7** ficam com severity LLM-judged → entram em `review` mas não bloqueiam H8
+
+Calibração honesta deve avaliar **separadamente** por dimensão de impacto. Decisão dupla:
+
+| Decisão | Métrica | Limiar |
+|---|---|---|
+| **`PRIMARY_STABLE_FOR_H8`** | κ médio em C2+C3+C4+C6 (mecânicos críticos) | ≥ 0,80 |
+| **`MODERATE_FOR_H8`** | mesmos | 0,60 – 0,79 |
+| **`INVESTIGATE_FOR_H8`** | mesmos | < 0,60 |
+| **Status agregado** | κ médio C1-C7 (média não-ponderada) | mesmos limiares originais |
+
+**Justificativa:** observado em parcial (70/250) que GPT-4o-mini flaga C5 em 80% dos laudos vs DeepSeek 7,2%. Divergência **metodológica** (rigor estilístico do GPT vs aceitação de paráfrases) — **não bug**. Para H8 o que importa é se ambos concordam nos critérios objetivos (C2-C4-C6), não se ambos concordam em "omissões estilísticas" (C5).
+
+**Pré-registrado em commit antes da conclusão de Step 5** (251ª linha do JSONL ainda não escrita). Anti-p-hacking preserved.
+
 **Estratificação da amostra (n=250):**
 - **6 críticos** (100% — Tier 1 obrigatório)
 - **13 major** (100% — obrigatório)
