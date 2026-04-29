@@ -154,6 +154,29 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 |---|---|---|
 | `birads_label` (categoria 0-6) | Anotada por radiologistas no dataset original. **Presente em ambos** `data/reports_raw_canonical.csv` E `data/reports_translated_pt.csv`. Tipo: integer 0-6 (sem subclassificação 4A/4B/4C — confirmado: 0 matches em regex no texto). **Externa ao texto** — verificado em 5 laudos cat 4 (corpo não menciona "BI-RADS"). | (a) Ground truth genuíno, não-circular; permite avaliação cross-língua robusta. (b) H6 (sem viés BI-RADS) usa estratificação por label externo, sem contaminação por tradução. (c) Distribuição: 0=966, 1=596, 2=2635, 3=87, 4=52, 5=16, 6=5. **2 estratos n<30 (5 e 6)** → exigem tratamento especial em Kruskal-Wallis (pooling 5+6 ou exact tests). |
 
+## T13 Step 5 — Critérios de decisão calibração DeepSeek↔GPT-4o-mini
+
+**Pré-registrado antes da execução (anti-p-hacking).**
+
+| κ médio (DeepSeek↔GPT-4o-mini) | Decisão | Ação |
+|---|---|---|
+| **≥ 0,80** | `PRIMARY_STABLE` | DeepSeek validado como auditor primário; T13 segue como autoridade. |
+| **0,60 – 0,79** | `MODERATE` | Concordância substancial mas não excelente. Reportar discordâncias por critério; T13 mantido com caveat documentado em T23 §7. |
+| **0,40 – 0,59** | `INVESTIGATE` | Concordância moderada. **Pausar** antes de aceitar; investigar discordâncias críticas com radiologista (T22 antecipado). |
+| **< 0,40** | `DOWNGRADE` | Auditor primário sob suspeita. **Pausar Phase B**; revisão completa de prompt/criteria antes de prosseguir. |
+
+**Estratificação da amostra (n=250):**
+- **6 críticos** (100% — Tier 1 obrigatório)
+- **13 major** (100% — obrigatório)
+- **50 minor** estratificados (C1=20, C5=20, C7=10)
+- **181 aleatórios** estratificados por `birads_label` (proporcional à distribuição)
+
+**Métricas reportadas:**
+- κ Cohen pareada por critério (C1-C7) com BCa bootstrap n=10000
+- κ por severidade (critical, major, minor)
+- κ médio global (média ponderada por contagem de critérios)
+- Lista de discordâncias com IDs para análise qualitativa
+
 ## Estratificação para testes de hipóteses
 
 | Decisão | Hipótese | Justificativa | Implementação |
