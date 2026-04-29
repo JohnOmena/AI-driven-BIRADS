@@ -1,0 +1,20 @@
+{
+  "metadata": {
+    "method": "p5 of BT metrics on duplicate pairs",
+    "n_duplicates_in_bt": 100
+  },
+  "thresholds": {
+    "cosine_es_es_bt": {
+      "p5": 0.944195,
+      "p5_observed": 0.944195
+    },
+    "bertscore_f1_es_es_bt": {
+      "p5": 0.976715,
+      "p5_observed": 0.976715
+    },
+    "chrf_es_es_bt": {
+      "p5": 88.52215,
+      "p5_observed": 88.52215
+    }
+  }
+}

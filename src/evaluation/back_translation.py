@@ -36,12 +36,14 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 
 # Prompt minimalista (decisão T14.B)
+# v2 (2026-04-28): instrução explícita para suprimir preâmbulo após smoke detectar
+# o modelo retornando "Aqui está a tradução fiel..." + markdown **LAUDO ES:**
 PROMPT = """Traduza o seguinte laudo do português ao espanhol fielmente, preservando terminologia médica BI-RADS.
 
-LAUDO PT:
-{pt_text}
+IMPORTANTE: Retorne APENAS o texto traduzido em espanhol. Não adicione preâmbulo, explicação, formatação markdown, nem metadados como "LAUDO ES:" ou similares.
 
-TRADUÇÃO ES:"""
+LAUDO PT:
+{pt_text}"""
 
 
 def build_stratified_sample(target_n: int = 250, seed: int = 42) -> dict:
