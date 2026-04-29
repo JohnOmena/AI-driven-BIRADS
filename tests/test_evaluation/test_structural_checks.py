@@ -124,6 +124,50 @@ def test_check_negation_lost():
     assert out["negation_pass"] is False
 
 
+# --- Negação T16 fix (2026-04-28): regex word-bounded sem overcount ---
+
+def test_count_negations_simple_es():
+    """'no se observa' → 1 negação (não conta 'no' genérico em cima)."""
+    assert count_negations("no se observa nódulo", "es") == 1
+
+
+def test_count_negations_compound_es():
+    """'no se observan ni se identifican' → 2 (composta + ni; sem overcount)."""
+    assert count_negations("no se observan ni se identifican lesiones", "es") == 2
+
+
+def test_count_negations_coordinative_es():
+    """'no hay X ni Y' → 2 (composta no hay + coordenativa ni)."""
+    assert count_negations("no hay imagen nodular ni microcalcificaciones", "es") == 2
+
+
+def test_count_negations_pt_passive_mirror():
+    """'não são observadas X nem Y' → 2 (composta não são + coordenativa nem)."""
+    assert count_negations("não são observadas imagens nem calcificações", "pt") == 2
+
+
+def test_count_negations_pt_generic_isolated():
+    """'achado não característico' → 1 (não isolado, sem composta)."""
+    assert count_negations("achado não característico", "pt") == 1
+
+
+def test_check_negation_preserved_3vs3_ratio_1():
+    """ES com 3 negações + PT com 3 negações → ratio 1.0, pass=True."""
+    es = "no se observan calcificaciones sospechosas. no hay imagen nodular ni distorsión."
+    pt = "não são observadas calcificações suspeitas. não há imagem nodular nem distorção."
+    out = check_negation_preserved(es, pt)
+    assert out["negation_es_count"] == 3
+    assert out["negation_pt_count"] == 3
+    assert out["negation_ratio"] == 1.0
+    assert out["negation_pass"] is True
+
+
+def test_count_negations_no_overcount_with_generic_nao():
+    """Regression: 'não' genérico não dobra contagem em padrões compostos."""
+    # 'não se observam' deve contar 1 (composta), NÃO 2 (composta + genérico)
+    assert count_negations("não se observam alterações", "pt") == 1
+
+
 # --- Anatomia ---
 
 def test_check_anatomy_pass():

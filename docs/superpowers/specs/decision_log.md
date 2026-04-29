@@ -145,7 +145,15 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 
 | Hipótese | Observado vs Esperado | Status | Decisão metodológica |
 |---|---|---|---|
+| H4 estrutural | 99,70% all_structural_pass (pós-A1 fix) vs ≥95% | **CONFIRMADA** | Pré-fix mostrava 75,18% por bug em `count_negations` (lista PT-pt incompleta). Pós-fix com regex word-bounded: cat 99,95% + meas 100% + lat 99,84% + neg 99,91% + anat 100%. Diff: 1.071 fail→pass, 1 regressão. Snapshot pre-fix preservado em `structural_checks_pre_negation_fix.csv` (commit 42b6277). |
 | H5 estabilidade operacional | 7,0% structural_instability (observado) vs ≤2% (esperado) | **FALHADA** | Variabilidade intrínseca do Gemini com `temperature=0` sob restart de sessão. Pares com divergência estrutural são automaticamente flagados para revisão MQM (T22 Tier 2). Reportada como **limitação reconhecida** em T23 §6. **NÃO ajustar threshold retroativamente** (anti-p-hacking; pré-registrado em T19). |
+
+## Bugs corrigidos retroativamente
+
+| Bug | Task | Diagnóstico | Fix | Impacto |
+|---|---|---|---|---|
+| `count_negations` PT subdimensionado | T16 | Lista linear `["não se ", "sem ", "ausência", "ausente", "nenhum", "nenhuma"]` não capturava formas passivas comuns em PT-br médico ("não são observadas", "não há", "nem"). Resultado: 1.066/1.074 fails eram falsos-positivos de "perda de negação" (ratio mediano 0,33). | Regex word-bounded com alternation ordenada (compostas → léxicas → genérico). `findall` consome non-overlapping → não duplica. Simulação 20 laudos: 20/20 ratio=1.000. 7 testes TDD adicionados. | `all_structural_pass` 75,18% → 99,70% (+24,52 pp); H4 confirmada. Cross-check: `lexical_loss_with_structural_fail` 24 → 0 (artefato em cascata também resolvido). |
+| `lexical_hallucination_flag` 23,88% | T17 | **ARTEFATO confirmado:** T17 conta variantes morfológicas no PT (singular+plural via `_is_number_variant`) mas só termo canônico no ES. Ex: "imagen nodular" ES=1 vs "imagem nodular" + "imagens nodulares" PT=2 → flag erroneamente. Não indica alucinação real. | **Aceitar como limitação reconhecida.** Não fixar (assimetria de morfologia ES é não-trivial; Atlas só tem `forms_es` para 25/103 termos). Métrica primária para H2 é `overall_acceptable_rate` (1,0) e `lexical_loss_flag` (1,33%). `hallucination_flag` mantida no CSV como diagnóstico, **NÃO** entra no composite_score (verificado: ausente em `consolidate.py`). | H2 segue confirmada. Limitação documentada em T23 §5b. |
 
 ## Custos
 

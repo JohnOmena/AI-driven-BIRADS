@@ -153,15 +153,33 @@ def check_laterality_preserved(es_text: str, pt_text: str) -> dict:
 
 
 # --- 4. Negação ---
+# T16 fix (2026-04-28): regex word-bounded com alternation ordenada (compostas
+# primeiro, genérico último). re.findall consome non-overlapping → não duplica.
+# Lista linear anterior subdimensionava PT em 24 p.p. (NEG_PT só "não se" mas
+# laudos PT-br usam "não são observadas", "não há", "nem" predominantemente).
 
-NEG_ES = ["no se ", "sin ", "ausencia", "ausente", "ningún", "ninguna"]
-NEG_PT = ["não se ", "sem ", "ausência", "ausente", "nenhum", "nenhuma"]
+_NEG_ES_RE = re.compile(
+    r"\b(?:"
+    r"no\s+(?:se|son|fue|fueron|hay|ha)"            # passivas/compostas
+    r"|ni|sin|ausencia|ausente|ningun[ao]?"          # léxicas + coordenativa
+    r"|no"                                            # genérico (último)
+    r")\b",
+    re.IGNORECASE,
+)
+_NEG_PT_RE = re.compile(
+    r"\b(?:"
+    r"nao\s+(?:se|sao|foi|foram|ha)"                 # passivas/compostas
+    r"|nem|sem|ausencia|ausente|nenhum[ao]?"          # léxicas + coordenativa
+    r"|nao"                                           # genérico (último)
+    r")\b",
+    re.IGNORECASE,
+)
 
 
 def count_negations(text: str, lang: str = "pt") -> int:
     text_n = _norm(text)
-    terms = NEG_PT if lang == "pt" else NEG_ES
-    return sum(text_n.count(_norm(t)) for t in terms)
+    rgx = _NEG_PT_RE if lang == "pt" else _NEG_ES_RE
+    return len(rgx.findall(text_n))
 
 
 def check_negation_preserved(es_text: str, pt_text: str) -> dict:
