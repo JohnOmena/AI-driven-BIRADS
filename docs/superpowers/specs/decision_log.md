@@ -141,6 +141,12 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 | PHI base PT-br: 0 matches | Pre-flight T12 | 7 padrões testados; 0 ocorrências reais | (verificação empírica 2026-04-29) |
 | PHI base ES: 21 falso-positivos confirmados visualmente | Pre-flight T12 | "PACIENTE PORTADORA/CON ANTECEDENTE/EN CONTROL" — descrições clínicas, não nomes | (verificação empírica 2026-04-29) |
 
+## Hipóteses pré-registradas (status observado)
+
+| Hipótese | Observado vs Esperado | Status | Decisão metodológica |
+|---|---|---|---|
+| H5 estabilidade operacional | 7,0% structural_instability (observado) vs ≤2% (esperado) | **FALHADA** | Variabilidade intrínseca do Gemini com `temperature=0` sob restart de sessão. Pares com divergência estrutural são automaticamente flagados para revisão MQM (T22 Tier 2). Reportada como **limitação reconhecida** em T23 §6. **NÃO ajustar threshold retroativamente** (anti-p-hacking; pré-registrado em T19). |
+
 ## Custos
 
 | Decisão | Task | Justificativa | Referência |
