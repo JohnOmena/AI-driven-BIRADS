@@ -74,6 +74,8 @@ class LLMClient:
             return self._generate_google(prompt, temperature)
         elif self.provider in ("openai", "openai_compatible", "together"):
             return self._generate_openai(prompt, temperature)
+        elif self.provider == "anthropic":
+            return self._generate_anthropic(prompt, temperature)
         else:
             raise ValueError(f"Unknown provider: {self.provider}")
 
@@ -110,6 +112,24 @@ class LLMClient:
                 output_tokens=candidates + thoughts,
             )
         return response.text
+
+    def _generate_anthropic(self, prompt: str, temperature: float) -> str:
+        """Generate via Anthropic SDK (Step 5b: Claude Haiku 4.5 calibração)."""
+        import anthropic
+        client = anthropic.Anthropic(api_key=self.api_key)
+        response = client.messages.create(
+            model=self.model_id,
+            max_tokens=4096,
+            temperature=temperature,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        usage = response.usage
+        if usage:
+            self._update_usage(
+                input_tokens=getattr(usage, "input_tokens", 0) or 0,
+                output_tokens=getattr(usage, "output_tokens", 0) or 0,
+            )
+        return response.content[0].text
 
     def _generate_openai(self, prompt: str, temperature: float) -> str:
         """Generate via OpenAI-compatible API."""

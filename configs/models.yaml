@@ -42,6 +42,14 @@ models:
     cost_per_1m_output: 0.60
     cost_limit_usd: 5.00
 
+  claude-haiku:                        # T13 Step 5b: 3a familia LLM (Anthropic)
+    provider: anthropic
+    model_id: claude-haiku-4-5-20251001
+    env_key: HAIKU_API_KEY
+    cost_per_1m_input: 1.00
+    cost_per_1m_output: 5.00
+    cost_limit_usd: 5.00
+
   llama-3.3-70b:
     provider: together
     model_id: meta-llama/Llama-3.3-70B-Instruct-Turbo
