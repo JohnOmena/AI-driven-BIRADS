@@ -7,7 +7,19 @@ from dataclasses import dataclass, field
 
 @dataclass
 class LLMClient:
-    """Unified client for LLM API calls with token tracking."""
+    """Unified client for LLM API calls with token tracking.
+
+    T14.A: tracking de tokens corrigido. Phase A custou ~R$160 (vs $0.20
+    reportado) por dois bugs combinados:
+      1. `thoughts_token_count` não era contado (Gemini 2.5 Flash thinking ON
+         gera tokens internos cobrados como output)
+      2. preços yaml desatualizados ($0.15/$0.60 vs reais $0.30/$2.50)
+
+    Fix:
+      - Soma `thoughts_token_count` ao output em _generate_google
+      - Suporta `thinking_budget` configurável (0 desativa thinking)
+      - Preços yaml já atualizados (commit aa17c1d, fora desta branch)
+    """
 
     name: str
     provider: str
@@ -17,8 +29,10 @@ class LLMClient:
     cost_per_1m_input: float = 0.0
     cost_per_1m_output: float = 0.0
     cost_limit_usd: float = 50.0
+    thinking_budget: int | None = None  # T14.A: 0 desativa thinking; None = padrão Google
     total_input_tokens: int = 0
     total_output_tokens: int = 0
+    total_thoughts_tokens: int = 0       # T14.A: campo separado para auditoria
     total_cost_usd: float = 0.0
 
     _last_cost_alert_usd: float = 0.0
@@ -64,21 +78,36 @@ class LLMClient:
             raise ValueError(f"Unknown provider: {self.provider}")
 
     def _generate_google(self, prompt: str, temperature: float) -> str:
-        """Generate via Google Generative AI SDK."""
+        """Generate via Google Generative AI SDK.
+
+        T14.A:
+          - Soma `thoughts_token_count` ao output (cobrado como output)
+          - Suporta `thinking_budget` (0 desativa thinking; None = padrão)
+        """
         from google import genai
 
         client = genai.Client(api_key=self.api_key)
+
+        config_kwargs = {"temperature": temperature}
+        if self.thinking_budget is not None:
+            config_kwargs["thinking_config"] = genai.types.ThinkingConfig(
+                thinking_budget=self.thinking_budget
+            )
+
         response = client.models.generate_content(
             model=self.model_id,
             contents=prompt,
-            config=genai.types.GenerateContentConfig(temperature=temperature),
+            config=genai.types.GenerateContentConfig(**config_kwargs),
         )
-        # Track usage
+        # T14.A: track all token types — thoughts cobrados como output
         usage = response.usage_metadata
         if usage:
+            thoughts = getattr(usage, "thoughts_token_count", 0) or 0
+            candidates = usage.candidates_token_count or 0
+            self.total_thoughts_tokens += thoughts
             self._update_usage(
                 input_tokens=usage.prompt_token_count or 0,
-                output_tokens=usage.candidates_token_count or 0,
+                output_tokens=candidates + thoughts,
             )
         return response.text
 
@@ -117,7 +146,10 @@ class LLMClient:
 
 
 def create_client(name: str, model_config: dict) -> LLMClient:
-    """Create an LLMClient from model config and environment variables."""
+    """Create an LLMClient from model config and environment variables.
+
+    T14.A: lê `thinking_budget` do yaml (None se ausente).
+    """
     api_key = os.environ.get(model_config["env_key"], "")
     return LLMClient(
         name=name,
@@ -128,4 +160,5 @@ def create_client(name: str, model_config: dict) -> LLMClient:
         cost_per_1m_input=model_config.get("cost_per_1m_input", 0.0),
         cost_per_1m_output=model_config.get("cost_per_1m_output", 0.0),
         cost_limit_usd=model_config.get("cost_limit_usd", 50.0),
+        thinking_budget=model_config.get("thinking_budget"),  # T14.A
     )
