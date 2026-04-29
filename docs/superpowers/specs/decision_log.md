@@ -154,6 +154,12 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 |---|---|---|
 | `birads_label` (categoria 0-6) | Anotada por radiologistas no dataset original. **Presente em ambos** `data/reports_raw_canonical.csv` E `data/reports_translated_pt.csv`. Tipo: integer 0-6 (sem subclassificação 4A/4B/4C — confirmado: 0 matches em regex no texto). **Externa ao texto** — verificado em 5 laudos cat 4 (corpo não menciona "BI-RADS"). | (a) Ground truth genuíno, não-circular; permite avaliação cross-língua robusta. (b) H6 (sem viés BI-RADS) usa estratificação por label externo, sem contaminação por tradução. (c) Distribuição: 0=966, 1=596, 2=2635, 3=87, 4=52, 5=16, 6=5. **2 estratos n<30 (5 e 6)** → exigem tratamento especial em Kruskal-Wallis (pooling 5+6 ou exact tests). |
 
+## Estratificação para testes de hipóteses
+
+| Decisão | Hipótese | Justificativa | Implementação |
+|---|---|---|---|
+| Agrupar BI-RADS 5+6 como `5-6` (alta suspeita) | H6 (sem viés BI-RADS) | Distribuição: cat 5 (n=16), cat 6 (n=5) — ambos < 30 mínimo para Kruskal-Wallis defensável. Agrupamento clinicamente coerente: ambas são categorias ACR BI-RADS de alta suspeita maligna. Cat 4 (n=52) acima do threshold, mantida individualmente. **Resultado: 6 estratos para teste estatístico** (0, 1, 2, 3, 4, '5-6' com n=21). Análise descritiva separada de 5 e 6 disponível como apêndice em T23. | T20 armazena `birads_label` original (0-6 puro) em `validation_results.jsonl`. Agrupamento 5+6 acontece **apenas em T23 §4** (estratificação na renderização do notebook), **NÃO no schema** — preserva ground truth para análises futuras. |
+
 ## Bugs corrigidos retroativamente
 
 | Bug | Task | Diagnóstico | Fix | Impacto |
