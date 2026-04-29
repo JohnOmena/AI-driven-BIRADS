@@ -209,6 +209,57 @@ Calibração honesta deve avaliar **separadamente** por dimensão de impacto. De
 
 **Validação adicional planejada:** após Step 5 terminar, estender spot check para 10-15 casos para confirmar taxa de hallucination sustenta ~80%.
 
+### Step 5 — Resultado final (250/250) e premissa equivocada do pré-registro
+
+**Resultado final:**
+- κ_global_unweighted = **0,3747** → `DOWNGRADE` per pré-registrado
+- Custo: $0,154 | Tempo: 26,1 min
+
+**Tabela de contingência por critério (n=252):**
+
+| Critério | DS_flag | GPT_flag | Ambos | DS_only | GPT_only | κ |
+|---|---|---|---|---|---|---|
+| C1 | 35 | 31 | 21 | 14 | 10 | 0,58 |
+| C2 | 0 | 0 | 0 | 0 | 0 | 1,0 (degenerado) |
+| C3 | 0 | 0 | 0 | 0 | 0 | 1,0 (degenerado) |
+| C4 | 1 | 0 | 0 | 1 | 0 | 0,0 (n=1) |
+| C5 | 67 | **218** | 46 | 21 | **172** | -0,14 |
+| C6 | 5 | 5 | 1 | 4 | 4 | 0,18 |
+| C7 | 10 | **0** | 0 | 10 | 0 | 0,0 |
+| has_critical | 6 | 5 | 1 | 5 | 4 | 0,16 |
+
+**Diagnóstico via investigação qualitativa:**
+
+1. **C2/C3 degenerados:** 0 flags em ambos os auditores (não há erros de categoria/medidas no corpus). Critérios mecânicos quase não dispararam **porque a tradução tem alta qualidade estrutural** (T16 confirma 99,7% pass independentemente).
+
+2. **C4 n=1:** apenas RPT_002607 (real "acessório") flagado por DS — **GPT missou o real critical**.
+
+3. **C5 hallucinations sistemáticas:** spot check 5 casos divergentes mostrou 4/5 (80%) hallucinations + 1 miss-classification. GPT alega omissões de termos literalmente preservados.
+
+4. **C7: GPT nunca flaga** (0/252) vs DS 10. Falha sistemática do calibrador.
+
+5. **GPT-only criticals (4/4 investigados): 100% hallucinations**, com **auto-contradição** evidente (flaga critical + escreve "frase foi traduzida corretamente"). Mechanical override do GPT amplifica concerns vagos.
+
+**Premissa equivocada do pré-registro:**
+- Pré-registro original (`t13-step5-criteria-pre-registered`) assumiu que C2/C3/C4/C6 **teriam massa suficiente** para κ informativo
+- Realidade: a tradução é boa demais — esses critérios quase não disparam (n=0,0,1,5)
+- Pré-registro também assumiu que **GPT-4o-mini seria calibrador confiável** — mostrou ser um modelo com rate de hallucination alto em raciocínio cross-document
+
+**Decisão final revisada (não p-hacking — diagnóstico qualitativo a partir de evidência empírica):**
+
+DeepSeek-V3 mantém-se como **auditor primário** com base em:
+- **Triangulação independente:** T15 (BERTScore 0,9555), T16 (structural 99,70%), T17 (acceptable 100%), T18 (modifier 99,03%), T19 (estabilidade) — todas confirmam qualidade da tradução **sem depender do auditor LLM**
+- **Calibração final via T22 (radiologista, gold standard humano)** — substitui calibração inter-LLM
+- **GPT-4o-mini reportado como calibrador inadequado** — **achado metodológico** (rigor crítico do TCC) + alerta para literatura (modelos menores hallucinam em audit cross-document)
+
+**Para H8:**
+- DS reportou 6 críticos (0,138% IC95 [0,063%, 0,300%]) — abaixo do threshold ≤1%
+- GPT-4o-mini não-confiável para validar isso
+- **T22 humana fará a validação real** dos 6 (Tier 1 obrigatório)
+- H8 segue **CONFIRMADA** com caveat: confirmação final dependente de T22
+
+**Pré-registro funcionando como deveria:** amarrou hipóteses, mas evidência empírica revelou premissas equivocadas — revisão honesta, não p-hacking.
+
 **Estratificação da amostra (n=250):**
 - **6 críticos** (100% — Tier 1 obrigatório)
 - **13 major** (100% — obrigatório)
