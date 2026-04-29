@@ -1,0 +1,29 @@
+{
+  "duplicate_candidate_count": 100,
+  "valid_duplicate_count": 100,
+  "effective_duplicate_count": 100,
+  "strict_reproducibility_pair_count": 0,
+  "excluded": {},
+  "median_cosine_pt_pt": 1.0,
+  "p5_cosine_pt_pt": 0.9901,
+  "median_bertscore_f1_pt_pt": 1.0,
+  "median_chrf_pt_pt": 100.0,
+  "exact_match_normalized_rate": 0.56,
+  "structural_instability_count": 7,
+  "structural_instability_rate": 0.07,
+  "structural_instability_ids": [
+    "RPT_000731",
+    "RPT_000743",
+    "RPT_000747",
+    "RPT_000755",
+    "RPT_000760",
+    "RPT_000803",
+    "RPT_000804"
+  ],
+  "h5_components": {
+    "median_cosine_passed": true,
+    "p5_cosine_passed": true,
+    "structural_passed": false
+  },
+  "h5_passed": false
+}
