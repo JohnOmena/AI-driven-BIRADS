@@ -146,7 +146,7 @@ Decisões metodológicas centralizadas. Cada linha aponta para a task que tomou 
 | Hipótese | Observado vs Esperado | Status | Decisão metodológica |
 |---|---|---|---|
 | H4 estrutural | 99,70% all_structural_pass (pós-A1 fix) vs ≥95% | **CONFIRMADA** | Pré-fix mostrava 75,18% por bug em `count_negations` (lista PT-pt incompleta). Pós-fix com regex word-bounded: cat 99,95% + meas 100% + lat 99,84% + neg 99,91% + anat 100%. Diff: 1.071 fail→pass, 1 regressão. Snapshot pre-fix preservado em `structural_checks_pre_negation_fix.csv` (commit 42b6277). |
-| H5 estabilidade operacional | 7,0% structural_instability (observado) vs ≤2% (esperado) | **FALHADA** | Variabilidade intrínseca do Gemini com `temperature=0` sob restart de sessão. Pares com divergência estrutural são automaticamente flagados para revisão MQM (T22 Tier 2). Reportada como **limitação reconhecida** em T23 §6. **NÃO ajustar threshold retroativamente** (anti-p-hacking; pré-registrado em T19). |
+| H5 estabilidade operacional | 1,0% structural_instability (pós-A1 fix) vs ≤2% (esperado) | **CONFIRMADA** | **Pré-A1 fix:** 7,0% (7 pares flagados) — falhada. **Pós-A1 fix:** 1,0% (1 par único: RPT_000725) — confirmada. **Diagnóstico:** os 7 pares originais eram artefato em cascata do bug `count_negations` (T16). Re-rodando T19 com structural_checks pós-fix, 6/7 reverteram para stable + 1 novo emergiu. Snapshot pre-fix preservado em `duplicate_pairs_pre_a1_fix.csv` + `duplicate_stability_summary_pre_a1_fix.json`. |
 
 ## Bugs corrigidos retroativamente
 

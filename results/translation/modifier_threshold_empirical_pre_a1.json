@@ -1,0 +1,7 @@
+{
+  "preservation_rate_threshold": 1.0,
+  "method": "p5 of preservation_rate on duplicate pairs (n>=30)",
+  "n_duplicates_with_coverage": 79,
+  "p5_observed": 1.0,
+  "fallback_floor": 0.9
+}
