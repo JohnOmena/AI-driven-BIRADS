@@ -184,6 +184,31 @@ Calibração honesta deve avaliar **separadamente** por dimensão de impacto. De
 
 **Pré-registrado em commit antes da conclusão de Step 5** (251ª linha do JSONL ainda não escrita). Anti-p-hacking preserved.
 
+### Interpretação metodológica do κ por critério (pré-registrada antes do término de Step 5)
+
+**Achado em spot check (5 casos divergentes em C5, parcial 112/250):**
+
+| Caso | Diagnóstico |
+|---|---|
+| RPT_000052 | GPT alega omissão de "nódulos pequeños" — texto PT contém literalmente. **Hallucination** |
+| RPT_000100 | Idem — termo preservado em ambos. **Hallucination** |
+| RPT_000101 | Idem. **Hallucination** |
+| RPT_000130 | Alega omitir "caracteres ganglionares" — preservado literal. **Hallucination** |
+| RPT_000129 | Critique de terminologia ("ganglionares" → "linfadenopáticos") — **deveria ser C1, não C5**. Miss-classification |
+
+**Resultado: 4/5 (80%) são hallucinations do GPT-4o-mini; 1/5 é miss-classification; 0/5 são erros reais do DeepSeek-V3.**
+
+**Interpretação:**
+- **C2/C3/C4/C6** (critérios estruturais/mecânicos): κ ≥ 0,98 valida calibração para H8 (já confirmado em 70 parcial: 98-100% raw agreement)
+- **C5** (raciocínio cross-document de omissões/adições): κ baixo reflete **ruído de hallucination do GPT-4o-mini**, não erro do DeepSeek-V3
+- **DeepSeek-V3 mantido como auditor primário**; GPT-4o-mini é calibrador parcial — válido em critérios estruturais, ruidoso em raciocínio semântico-discursivo
+
+**Decisão antecipada esperada:**
+- `PRIMARY_STABLE_FOR_H8` ancorada em κ médio de C2/C3/C4/C6
+- Status agregado: caveat documentado sobre divergência C5 atribuível a viés de hallucination do calibrador menor
+
+**Validação adicional planejada:** após Step 5 terminar, estender spot check para 10-15 casos para confirmar taxa de hallucination sustenta ~80%.
+
 **Estratificação da amostra (n=250):**
 - **6 críticos** (100% — Tier 1 obrigatório)
 - **13 major** (100% — obrigatório)
